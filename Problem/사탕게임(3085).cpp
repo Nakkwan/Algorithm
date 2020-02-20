@@ -2,6 +2,7 @@
 using namespace std;
 #define Maxnum 50
 
+
 int main() {
 	int N, eat = 0, count = 1;
 	cin >> N;
@@ -26,8 +27,9 @@ int main() {
 						start = bomboni[m][n];
 						if (count > eat) {
 							eat = count;
-							count = 1;
 						}
+						count = 1;
+						
 					}
 				}
 				if (count > eat) {
@@ -46,8 +48,9 @@ int main() {
 						start = bomboni[m][n];
 						if (count > eat) {
 							eat = count;
-							count = 1;
 						}
+						count = 1;
+						
 					}
 				}
 				if (count > eat) {
@@ -72,8 +75,9 @@ int main() {
 						start = bomboni[m][n];
 						if (count > eat) {
 							eat = count;
-							count = 1;
 						}
+						count = 1;
+						
 					}
 				}
 				if (count > eat) {
@@ -92,8 +96,9 @@ int main() {
 						start = bomboni[m][n];
 						if (count > eat) {
 							eat = count;
-							count = 1;
 						}
+						count = 1;
+						
 					}
 				}
 				if (count > eat) {
