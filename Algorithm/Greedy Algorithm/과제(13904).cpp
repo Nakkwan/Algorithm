@@ -3,8 +3,7 @@
 #include <algorithm>
 using namespace std;
 
-#define LOW 100000
-#define COL 2
+#define MAX 1000
 
 int partition(int** list, int left, int right) { //list1 is list for start_time, list2 is list for finish time
 	int pivot, temp;
@@ -52,46 +51,40 @@ void quick_sort(int** list, int left, int right) {
 	}
 }
 
+void set_day(int* list, int date, int score, int& sum) {
+	if (date > 0) {
+		if (list[date] == 0) {
+			list[date] = score;
+			sum += score;
+		}
+		else {
+			set_day(list, date - 1, score, sum);
+		}
+	}
+}
 
 
 int main() {
-	int N;				// size of conference
-	int start_time = 0, finish_time = 0;
-	int count = 1;
-	cin >> N;			
-
-	int** list_time;		//Dynamic allocate for conference time
-	list_time = new int*[LOW];
+	int N;
+	int sum = 0;
+	int day[1000] = { 0, };
+	cin >> N;
+	int** hw_num;
+	hw_num = new int* [N];
 	for (int i = 0; i < N; i++) {
-		list_time[i] = new int[COL];		//each low of list has two element about start time and finish time
+		hw_num[i] = new int[2];
 	}
-
 	for (int i = 0; i < N; i++) {
-		for (int j = 0; j < COL; j++) {
-			cin >> list_time[i][j];
+		for (int j = 0; j < 2; j++) {
+			cin >> hw_num[i][j];
 		}
 	}
-
-	quick_sort(list_time, 0, N - 1);	//sort the list_time in ascending order by the end if the finish time
-
-	start_time = list_time[0][0];
-	finish_time = list_time[0][1];
-
-	for (int i = 1; i < N; i++) {		//Count the number of meeting that has fastest end meeting times without overlapping.
-		if (list_time[i][0] >= finish_time) {
-			start_time = list_time[i][0];
-			finish_time = list_time[i][1];
-			count++;
-		}
+	quick_sort(hw_num, 0, N - 1);
+	for (int i = N - 1; i >= 0; i--) {
+		set_day(day, hw_num[i][0], hw_num[i][1], sum);
 	}
 
-	cout << count << endl;
-
-	for (int i = 0; i < COL; i++) {
-		delete[] list_time[i];
-	}
-
-	delete[] list_time;
+	cout << sum << endl;
 
 	return 0;
 }
