@@ -51,14 +51,15 @@ void quick_sort(int** list, int left, int right) {
 	}
 }
 
-void set_day(int* list, int date, int score, int& sum) {
-	if (date > 0) {
-		if (list[date] == 0) {
-			list[date] = score;
+/*function for set day of hw*/
+void set_day(int* list, int date, int score, int& sum) {	//parameter is list of day, day of deadline, score and score sum 
+	if (date > 0) {											//for recursion
+		if (list[date] == 0) {								//if applied date empty
+			list[date] = score;								// set score of that day
 			sum += score;
 		}
 		else {
-			set_day(list, date - 1, score, sum);
+			set_day(list, date - 1, score, sum);			//if applied day already svheduled, find previous day
 		}
 	}
 }
@@ -80,11 +81,19 @@ int main() {
 		}
 	}
 	quick_sort(hw_num, 0, N - 1);
+
+	/*set day of all case*/
 	for (int i = N - 1; i >= 0; i--) {
 		set_day(day, hw_num[i][0], hw_num[i][1], sum);
 	}
 
 	cout << sum << endl;
+
+	for (int i = 0; i < N; i++) {
+		delete[] hw_num[i];
+	}
+
+	delete[] hw_num;
 
 	return 0;
 }
