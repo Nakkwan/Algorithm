@@ -1,0 +1,72 @@
+[33mcommit 98dad23e1976fc91a1f9071be86fe9b77c3690e2[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: Nakkwan <cvvc1997@gmail.com>
+Date:   Thu Feb 27 22:54:06 2020 +0900
+
+    2167, 1992, 10844
+
+[33mcommit 9a3051a29245b9409df10fee1fe84916eacf4626[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: Nakkwan <cvvc1997@gmail.com>
+Date:   Wed Feb 26 17:14:28 2020 +0900
+
+    DP, 11726
+
+[33mcommit 197e0e630a4b85bc4ee76c5435f5f57c29ee7e21[m
+Merge: ff6986e a5eec5f
+Author: Nakkwan <cvvc1997@gmail.com>
+Date:   Tue Feb 25 02:55:07 2020 +0900
+
+    Merge branch 'master' of https://github.com/Nakkwan/Baekjoon_prac
+
+[33mcommit ff6986e4d9935745ec74300b18e9bed06d396d1e[m
+Author: Nakkwan <cvvc1997@gmail.com>
+Date:   Tue Feb 25 02:54:39 2020 +0900
+
+    Divide&Conquer 1074 and other answer
+
+[33mcommit a5eec5fc82ee64d4b6c15ed0e63482bd8a1aa92a[m
+Author: Nakkwan CHOI <cvvc1997@gmail.com>
+Date:   Mon Feb 24 19:27:36 2020 +0900
+
+    Update README.md
+
+[33mcommit cd9549b51eacf044ed445046514805362dc76a70[m
+Author: Nakkwan <cvvc1997@gmail.com>
+Date:   Mon Feb 24 19:19:51 2020 +0900
+
+    divide&conquer algorithm, 1780
+
+[33mcommit 6afe36ba5920c521e991b3e1ad7f7e5350eb0d53[m
+Author: Nakkwan <cvvc1997@gmail.com>
+Date:   Mon Feb 24 01:01:07 2020 +0900
+
+    Greedy Algorithm 13904
+
+[33mcommit 464e9849b8d149391784bb3f37a62d34ca770993[m
+Author: Nakkwan <cvvc1997@gmail.com>
+Date:   Fri Feb 21 15:04:49 2020 +0900
+
+    Greedy_1931
+
+[33mcommit 31efa2f7c6eefaad71273df139fb174289af8a83[m
+Author: Nakkwan <cvvc1997@gmail.com>
+Date:   Fri Feb 21 01:35:26 2020 +0900
+
+    create Algorithm file, Greedy Algorithm
+
+[33mcommit bfbfb745c5561329d8db2348f77d4d05f288239f[m
+Author: Nakkwan <cvvc1997@gmail.com>
+Date:   Wed Feb 5 23:14:33 2020 +0900
+
+    3085
+
+[33mcommit e01efa5fc17fcf0fb772df9e99f8aeebdf3244bb[m
+Author: Nakkwan <cvvc1997@gmail.com>
+Date:   Wed Feb 5 22:44:26 2020 +0900
+
+    day 1
+
+[33mcommit 81ad1ba1ca95cf511ea57dc63d39eaa61f962f4a[m
+Author: Nakkwan CHOI <cvvc1997@gmail.com>
+Date:   Wed Feb 5 15:00:50 2020 +0900
+
+    Initial commit
