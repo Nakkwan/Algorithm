@@ -1,0 +1,5 @@
+﻿  main.cpp
+  unsortedlist.cpp
+C:\Users\cvvc1\source\repos\Unsorted_list\unsortedlist.cpp(25,12): warning C4553: '==': 식의 결과가 사용되지 않습니다. '='을(를) 의도했습니까?
+  코드를 생성하고 있습니다...
+  Unsorted_list.vcxproj -> C:\Users\cvvc1\source\repos\Unsorted_list\Debug\Unsorted_list.exe
