@@ -138,11 +138,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ArrayList.cpp" />
+    <ClCompile Include="ItemType.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="unsortedlist.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="unsortedlist.h" />
+    <ClInclude Include="ArrayList.h" />
+    <ClInclude Include="ItemType.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

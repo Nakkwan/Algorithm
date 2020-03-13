@@ -1,9 +1,9 @@
 #include <iostream>
-#include "unsortedlist.h"
+#include "ArrayList.h"
 
 
 int main() {
-	Unsortedlist ls(4);
+	ArrayList ls(4);
 	ls.Add(1);
 	ls.Display();
 	ls.Add(2);
