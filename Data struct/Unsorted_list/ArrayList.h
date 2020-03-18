@@ -1,26 +1,30 @@
-#ifndef UNSORTEDLIST_H
-#define UNSORTEDLIST_H
-#define MAX_SIZE 5
+#ifndef ARRAYLIST_H
+#define ARRAYLIST_H
+#define MAXSIZE 5
+
+#include <iostream>
+using namespace std;
+
+#include "ItemType.h"
 
 class ArrayList {
 private:
-	int size;
-	int current;
-	int data_length;
-	int* node;
+	int m_CurPointer;
+	int m_length;
+	ItemType m_Array[MAXSIZE];
 public:
-	ArrayList(int size);
+	ArrayList();
 	~ArrayList() {};
 
-	void Add(int val);
-	void Delete(int val);
+	void Add(ItemType data);
 	void MakeEmpty();
-	int Lengthls();
-	bool IsFull();
-	int GetNextItem();
-	int RetrieveItem(int val);
-	void Display();
-	void replace(int index, int value);
+	int GetLength();
+	int IsFull();
+	void ResetList();
+	int GetNextItem(ItemType& data);
+	int Get(ItemType& data);
+	void Delete(ItemType data);
+	void Replace(ItemType data);
 
 };
 

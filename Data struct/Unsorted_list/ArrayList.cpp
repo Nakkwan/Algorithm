@@ -1,95 +1,81 @@
 #include "ArrayList.h"
-#include <iostream>
 
-ArrayList::ArrayList(int size1) {
-	size = size1;
-	current = -1;
-	data_length = 0;
-	node = new int[size];
+ArrayList::ArrayList() {
+	m_CurPointer = -1;
+	m_length = 0;
 }
 
-void ArrayList::Add(int val) {
-	if (data_length < size) {
-		node[data_length] = val;
-		data_length++;
+void ArrayList::Add(ItemType data) {
+	if (m_length < MAXSIZE) {
+		m_Array[m_length] = data;
+		m_length++;
 	}
 	else {
 		std::cout << "Error: List if full\n";
 	}
 }
 
-void ArrayList::Delete(int val) {
+void ArrayList::MakeEmpty() {
+	m_length = 0;
+}
+
+int ArrayList::GetLength() {
+	return m_length;
+}
+
+int ArrayList::IsFull() {
+	if (m_length == MAXSIZE) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+
+int ArrayList::GetNextItem(ItemType& data) {
+	m_CurPointer++;
+	data = m_Array[m_CurPointer];
+	return m_CurPointer;
+}
+
+void ArrayList::ResetList() {
+	m_CurPointer = 0;
+}
+
+int ArrayList::Get(ItemType& data) {
+	for (int i = 0; i < m_length; i++) {
+		if (m_Array[i].CompareByID(data) == EQUAL) {
+			data.SetRecord(m_Array[i].GetId(), m_Array[i].GetName(), m_Array[i].GetAddress());
+			return 1;
+		}
+	}
+	return 0;
+}
+
+void ArrayList::Delete(ItemType data) {
 	bool exist = false;
-	for (int i = 0; i < data_length; i++) {
-		if (node[i] == val) {
-			node[i] == 0;
-			for (int j = i; j < data_length; j++) {
-				int temp = node[j];
-				node[j] = node[j + 1];
-				node[j + 1] = temp;
+	for (int i = 0; i < m_length; i++) {
+		if (m_Array[i].CompareByID(data) == EQUAL) {
+			for (int j = i; j < m_length - 1; j++) {
+				ItemType temp = m_Array[j];
+				m_Array[j] = m_Array[j + 1];
+				m_Array[j + 1] = temp;
 			}
-			data_length--;
-			node[data_length] = NULL;
+			m_length--;
 			exist = true;
 			break;
 		}
 	}
+
 	if (exist == false) {
-		std::cout << "Error: Value is not exist\n";
+		std::cout << "Data is not exist\n";
 	}
 }
 
-void ArrayList::MakeEmpty() {
-	if (data_length != 0) {
-		for (int i = 0; i < data_length; i++) {
-			node[i] = NULL;
-		}
-		data_length = 0;
-	}
-}
-
-int ArrayList::Lengthls() {
-	return data_length;
-}
-
-bool ArrayList::IsFull() {
-	if (data_length == size) {
-		return true;
-	}
-	else {
-		return false;
-	}
-}
-
-int ArrayList::GetNextItem() {
-	current++;
-	return node[current];
-}
-
-int ArrayList::RetrieveItem(int val) {
-	for (int i = 0; i < data_length; i++) {
-		if (val == GetNextItem()) {
-			int index = current;
-			current = -1;
-			return index;
+void ArrayList::Replace(ItemType data) {
+	for (int i = 0; i < m_length; i++) {
+		if (m_Array[i].CompareByID(data) == EQUAL) {
+			m_Array[i].SetRecord(data.GetId(), data.GetName(), data.GetAddress());
 		}
 	}
-	current = -1;
-	return current;
-}
-
-void ArrayList::Display() {
-	if (data_length != 0) {
-		for (int i = 0; i < data_length; i++) {
-			std::cout << node[i] << ' ';
-		}
-		std::cout << '\n';
-	}
-	else {
-		std::cout << "List is empty\n";
-	}
-}
-
-void ArrayList::replace(int index, int value) {
-	node[index] = value;
 }
