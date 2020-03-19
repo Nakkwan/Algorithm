@@ -22,16 +22,19 @@ void Application::Run()
 		case 4:		// search item
 			SearchItembyID();
 			break;
-		case 5:		// delete item
+		case 5:		// search item
+			SearchItembyName();
+			break;
+		case 6:		// delete item
 			DeleteItem();
 			break;
-		case 6:		// update item
+		case 7:		// update item
 			UpdateItem();
 			break;
-		case 7:		// load list data from a file.
+		case 8:		// load list data from a file.
 			ReadDataFromFile();
 			break;
-		case 8:		// save list data into a file.
+		case 9:		// save list data into a file.
 			WriteDataToFile();
 			break;
 		case 0:
@@ -103,7 +106,7 @@ void Application::DisplayAllItem()
 	m_List.ResetList();
 	int length = m_List.GetLength();
 	int curIndex = m_List.GetNextItem(data);
-	while (curIndex < length && curIndex != -1)
+	while (curIndex < length /*&& curIndex != -1*/)
 	{
 		data.DisplayRecordOnScreen();
 		curIndex = m_List.GetNextItem(data);
@@ -201,9 +204,8 @@ void Application::SearchItembyID()
 	int id;
 
 	// 찾을 ID 입력
-	cout << "\n\tEnter the ID that you want to find : ";
-	cin >> id;
-	data.SetId(id);
+	cout << "\n\tEnter the ID that you want to find\n";
+	data.SetIdFromKB();
 
 	// list에서 ID검색하고 찾은 data를 화면에 출력 없는 경우엔 없다고 표시
 	if (m_List.Get(data) == 0)
@@ -211,6 +213,32 @@ void Application::SearchItembyID()
 	else {
 		cout << "\n\n\t << ID's data >>" << endl;
 		data.DisplayRecordOnScreen();
+	}
+}
+
+// 찾고 싶은 Name의 데이터를 찾아 화면에 출력
+void Application::SearchItembyName()
+{
+	cout << "\n\tEnter the name that you want to find\n";
+	ItemType dest = RetreiveRecordByMemberName();
+	SearchListByMemberName(dest);
+}
+
+ItemType Application::RetreiveRecordByMemberName() {
+	ItemType indata;
+	indata.SetNameFromKB();
+	return indata;
+}
+
+void Application::SearchListByMemberName(ItemType& inData) {
+	ItemType temp;
+	m_List.ResetList();
+	int pointer = m_List.GetNextItem(temp);
+	while (pointer < m_List.GetLength()) {
+		if (temp.GetName().find(inData.GetName()) != std::string::npos) {
+			temp.DisplayRecordOnScreen();
+		}
+		pointer = m_List.GetNextItem(temp);
 	}
 }
 

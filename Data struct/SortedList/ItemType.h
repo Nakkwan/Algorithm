@@ -22,6 +22,7 @@ public:
 	void SetName(string inName); // 학생 이름 저장 함수 
 	void SetAddress(string inAddress); // 학생 주소 저장 함수
 	void SetRecord(int inId, string inName, string inAddress); // 학생 정보 저장 함수
+	void SetRecordByItem(ItemType data);
 	void DisplayIdOnScreen(); // 학생 ID 출력 함수 
 	void DisplayNameOnScreen(); // 학생 이름 출력 함수
 	void DisplayAddressOnScreen(); // 학생 주소 출력 함수

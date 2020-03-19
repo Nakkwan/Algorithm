@@ -24,12 +24,12 @@ public:
 	int IsFull();
 	void ResetList();
 	int GetNextItem(ItemType& data);
-	int Add(ItemType data);
+	int Add(const ItemType& data);
 	int Delete(ItemType target);
 	int Replace(ItemType target);
 	int Get(ItemType& target);
 	int GetByBinarySearch(ItemType& data);
-
+	ItemType GetItem();
 };
 
 #endif

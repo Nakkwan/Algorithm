@@ -18,7 +18,7 @@ int SortedListType::IsFull() {
 }
 
 void SortedListType::ResetList() {
-	m_CurPointer = 0;
+	m_CurPointer = -1;
 }
 
 int SortedListType::GetNextItem(ItemType& data) {
@@ -27,14 +27,14 @@ int SortedListType::GetNextItem(ItemType& data) {
 	return m_CurPointer;
 }
 
-int SortedListType::Add(ItemType data) {
+int SortedListType::Add(const ItemType& data) {
 	if (m_length == 0) {
 		m_Array[0] = data;
 		m_length++;
 		return 1;
 	}
 	else if (m_length == MAXSIZE) {
-		cerr << "Array is pull/n";
+		cout << "Array is pull/n";
 		return 0;
 	}
 	else {
@@ -97,13 +97,16 @@ int SortedListType::Get(ItemType& target) {
 	while (m_CurPointer < m_length) {
 		switch (data.CompareByID(target)) {
 		case 0:
-			target.SetRecord(data.GetId(), data.GetName(), data.GetAddress());
-			return 1;
-		case 1:
-			return 0;
-		default:
 			GetNextItem(data);
 			break;
+		case 1:
+			return 0;
+		case 2:
+			target.SetRecord(data.GetId(), data.GetName(), data.GetAddress());
+			return 1;
+		/*default:
+			GetNextItem(data);
+			break;*/
 		}
 	}
 	return 0;
@@ -131,4 +134,7 @@ int SortedListType::GetByBinarySearch(ItemType& data){
 		}
 	}
 	return 0;
+}
+ItemType SortedListType::GetItem() {
+	return m_Array[m_CurPointer];
 }

@@ -96,11 +96,18 @@ public:
 	// 찾으려는 ID의 데이터를 리스트에서 검색 후 출력
 	void SearchItembyID();
 
+	// 찾으려는 Name의 데이터를 리스트에서 검색 후 출력
+	void SearchItembyName();
+
 	// 찾으려는 ID의 데이터를 리스트에서 검색 후 삭제
 	void DeleteItem();
 
 	// 바꾸려는 ID의 데이터를 리스트에서 검색 후 업데이트
 	void UpdateItem();
+
+	ItemType RetreiveRecordByMemberName();
+
+	void SearchListByMemberName(ItemType& inData);
 
 private:
 	ifstream m_InFile;		///< input file descriptor.
