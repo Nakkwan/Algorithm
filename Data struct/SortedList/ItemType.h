@@ -39,11 +39,6 @@ private:
 	int m_Id; // 학생 ID 
 	string m_sName; // 학생 이름 저장 변수 
 	string m_sAddress; // 학생 주소 저장 변수
-	//string mail_title; // 메일 제목
-	//string mail_sender_address;
-	//string label;
-	//char mail_content[256];
-	//char mail_gettime[16];
 };
 
 #endif

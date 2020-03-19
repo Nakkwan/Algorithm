@@ -50,7 +50,6 @@ void Application::Run()
 // Display command on screen and get a input from keyboard.
 int Application::GetCommand()
 {
-	int command;
 	cout << endl << endl;
 	cout << "\t---ID -- Command ----- " << endl;
 	cout << "\t   1 : Add item" << endl;
@@ -65,10 +64,10 @@ int Application::GetCommand()
 	cout << "\t   0 : Quit" << endl;
 
 	cout << endl << "\t Choose a Command--> ";
-	cin >> command;
+	cin >> m_Command;
 	cout << endl;
 
-	return command;
+	return m_Command;
 }
 
 
