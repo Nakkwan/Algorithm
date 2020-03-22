@@ -43,11 +43,11 @@ int SortedListType::Add(const ItemType& data) {
 		ResetList();
 		GetNextItem(temp);
 		while (m_CurPointer < m_length) {
-			if (temp.CompareByID(data) == LESS) {
+			if (temp.ComparedByTime(data) == LATER) {
 				GetNextItem(temp);
 				continue;
 			}
-			else if (temp.CompareByID(data) == GREATER) {
+			else if (temp.ComparedByTime(data) == BEFORE) {
 				for (int j = m_length; j > m_CurPointer; j--) {
 					m_Array[j] = m_Array[j - 1];
 				}
@@ -95,14 +95,14 @@ int SortedListType::Get(ItemType& target) {
 	ResetList();
 	GetNextItem(data);
 	while (m_CurPointer < m_length) {
-		switch (data.CompareByID(target)) {
+		switch (data.ComparedByTime(target)) {
 		case 0:
 			GetNextItem(data);
 			break;
 		case 1:
 			return 0;
 		case 2:
-			target.SetRecord(data.GetId(), data.GetName(), data.GetAddress());
+			target.SetMailinfo(data.GetTitle(), data.GetSender(), data.GetLabel(), data.GetTime(), data.GetContent());
 			return 1;
 			/*default:
 				GetNextItem(data);
@@ -120,14 +120,14 @@ int SortedListType::GetByBinarySearch(ItemType& data) {
 		int left = 0, right = m_length;
 		int mid = (left + right) / 2;
 		while (left == mid) {
-			if (m_Array[mid].CompareByID(data) == GREATER) {
+			if (m_Array[mid].ComparedByTime(data) == LATER) {
 				right = mid;
 			}
-			else if (m_Array[mid].CompareByID(data) == LESS) {
+			else if (m_Array[mid].ComparedByTime(data) == BEFORE) {
 				left = mid;
 			}
 			else {
-				data.SetRecord(m_Array[mid].GetId(), m_Array[mid].GetName(), m_Array[mid].GetAddress());
+				data.SetMailinfo(m_Array[mid].GetTitle(), m_Array[mid].GetSender(), m_Array[mid].GetLabel(), m_Array[mid].GetTime(), m_Array[mid].GetContent());
 				return 1;
 			}
 			mid = (left + right) / 2;

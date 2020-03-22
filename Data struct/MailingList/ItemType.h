@@ -5,6 +5,10 @@
 #include <fstream>
 using namespace std;
 
+enum CompareTime {
+	BEFORE, LATER, EQUAL
+};
+
 class ItemType {
 public:
 	/*
@@ -13,7 +17,9 @@ public:
 	ItemType() {// default constructor
 		mail_title = "";
 		mail_sender_address = "";
-		label = "";
+		mail_label = "";
+		content_length = 0;
+		mail_content = new char[256];
 	}
 	/*
 	Destructure
@@ -38,6 +44,23 @@ public:
 	string GetLabel(); 
 
 	/*
+	pre: setSender
+	post: return Sender of mail
+	*/
+	char* GetTime();
+
+	/*
+	pre: setContent
+	post: return content of mail
+	*/
+	char* GetContent();
+
+	/*
+	post: get length of mail content
+	*/
+	int GetContentLength();
+
+	/*
 	pre: assign string of title
 	post: set Title
 	*/
@@ -59,13 +82,25 @@ public:
 	pre: get time from system
 	post: Set time
 	*/
-	void SetTime();
+	void SetTime(char* time);
 
 	/*
-	pre: assign string of title, sender, label and content from Keyboard
+	pre: get content from system
+	post: Set content
+	*/
+	void SetContent(char* content, int N);
+
+	/*
+	pre: assign string of title, sender, label
 	post: set mail variables
 	*/
-	void SetMail(string inTitle, string inSender, string inLabel); 
+	void SetMailinfo(string inTitle, string inSender, string inLabel, char* inTime, char* inContent);
+
+	/*
+	pre: assign string of title, sender, label
+	post: set mail variables
+	*/
+	void SetMailinfoByItem(ItemType data);
 
 	/*
 	pre: title is already set
@@ -78,6 +113,18 @@ public:
 	post: display Sender on console
 	*/
 	void DisplaySenderOnScreen(); 
+
+	/*
+	pre: label is already set
+	post: display label on console
+	*/
+	void DisplaylabelOnScreen();
+
+	/*
+	pre: time is already set
+	post: display time on console
+	*/
+	void DisplaytimeOnScreen();
 
 	/*
 	pre: Content is already set
@@ -122,23 +169,30 @@ public:
 	void SetTimeFromKB();
 
 	/*
+	pre: set primaey key for search
+	post: return compare enum
+	*/
+	CompareTime ComparedByTime(ItemType data);
+
+	/*
 	pre: Assign file
 	post: Read data about mail information from file
 	*/
-	int ReadDataFromFile(std::ifstream& fin);
+	//int ReadDataFromFile(std::ifstream& fin);
 
 	/*
 	pre: Assign file
 	post: Write data about mail information to file
 	*/
-	int WriteDataToFile(std::ofstream& fout); 
+	//int WriteDataToFile(std::ofstream& fout); 
 
 private:
 	string mail_title; // 메일 제목
 	string mail_sender_address;		// 보내는 사람 메일 주소
-	string label;		// label 명
-	char mail_content[256];
+	string mail_label;		// label 명
+	char* mail_content;
 	char mail_gettime[16];
+	int content_length;
 };
 
 #endif

@@ -12,14 +12,15 @@ public:
 		m_command = 0;
 	}
 	~Application() {}
+	void CommandUI();
 	int GetCommand();
 	void Run();
 	void AddMail();
 	void DisplayAllMail();
 	void FindNDispalyMail();
 	void DeleteMailsInTimeInterval();
-	void ReadDataFromFile();
-	void WriteDataToFile();
+	//void ReadDataFromFile();
+	//void WriteDataToFile();
 };
 
 #endif // !APPLICATION_H
