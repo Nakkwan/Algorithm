@@ -16,15 +16,15 @@ public:
 	ArrayList();
 	~ArrayList() {};
 
-	void Add(ItemType data);
+	int Add(ItemType data);
 	void MakeEmpty();
 	int GetLength();
-	int IsFull();
+	bool IsFull();
 	void ResetList();
 	int GetNextItem(ItemType& data);
 	int Get(ItemType& data);
-	void Delete(ItemType data);
-	void Replace(ItemType data);
+	int Delete(ItemType data);
+	int Replace(ItemType data);
 
 };
 

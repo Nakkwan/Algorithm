@@ -5,13 +5,15 @@ ArrayList::ArrayList() {
 	m_length = 0;
 }
 
-void ArrayList::Add(ItemType data) {
-	if (m_length < MAXSIZE) {
+int ArrayList::Add(ItemType data) {
+	if (!IsFull()) {
 		m_Array[m_length] = data;
 		m_length++;
+		return 1;
 	}
 	else {
 		std::cout << "Error: List if full\n";
+		return 0;
 	}
 }
 
@@ -23,7 +25,7 @@ int ArrayList::GetLength() {
 	return m_length;
 }
 
-int ArrayList::IsFull() {
+bool ArrayList::IsFull() {
 	if (m_length == MAXSIZE) {
 		return 1;
 	}
@@ -34,48 +36,56 @@ int ArrayList::IsFull() {
 
 int ArrayList::GetNextItem(ItemType& data) {
 	m_CurPointer++;
+	if (m_CurPointer == m_length) {
+		return -1;
+	}
 	data = m_Array[m_CurPointer];
 	return m_CurPointer;
 }
 
 void ArrayList::ResetList() {
-	m_CurPointer = 0;
+	m_CurPointer = -1;
 }
 
 int ArrayList::Get(ItemType& data) {
-	for (int i = 0; i < m_length; i++) {
-		if (m_Array[i].CompareByID(data) == EQUAL) {
-			data.SetRecord(m_Array[i].GetId(), m_Array[i].GetName(), m_Array[i].GetAddress());
+	ItemType temp;
+	ResetList();
+	GetNextItem(temp);
+	while(m_CurPointer != -1) {
+		if (temp.CompareByID(data) == EQUAL) {
+			data.SetRecord(temp.GetId(), temp.GetName(), temp.GetAddress());
+			return 1;
+		}
+		GetNextItem(temp);
+	}
+	return 0;
+}
+
+int ArrayList::Delete(ItemType data) {
+	ItemType temp;
+	ResetList();
+	GetNextItem(temp);
+	while(m_CurPointer != -1) {
+		if (temp.CompareByID(data) == EQUAL) {
+			for (int j = m_CurPointer; j < m_length - 1; j++) {
+				m_Array[j] = m_Array[j + 1];
+			}
+			m_length--;
 			return 1;
 		}
 	}
 	return 0;
 }
 
-void ArrayList::Delete(ItemType data) {
-	bool exist = false;
-	for (int i = 0; i < m_length; i++) {
-		if (m_Array[i].CompareByID(data) == EQUAL) {
-			for (int j = i; j < m_length - 1; j++) {
-				ItemType temp = m_Array[j];
-				m_Array[j] = m_Array[j + 1];
-				m_Array[j + 1] = temp;
-			}
-			m_length--;
-			exist = true;
-			break;
+int ArrayList::Replace(ItemType data) {
+	ItemType temp;
+	ResetList();
+	GetNextItem(temp);
+	while(m_CurPointer != -1) {
+		if (temp.CompareByID(data) == EQUAL) {
+			temp.SetRecord(data.GetId(), data.GetName(), data.GetAddress());
+			return 1;
 		}
 	}
-
-	if (exist == false) {
-		std::cout << "Data is not exist\n";
-	}
-}
-
-void ArrayList::Replace(ItemType data) {
-	for (int i = 0; i < m_length; i++) {
-		if (m_Array[i].CompareByID(data) == EQUAL) {
-			m_Array[i].SetRecord(data.GetId(), data.GetName(), data.GetAddress());
-		}
-	}
+	return 0;
 }
