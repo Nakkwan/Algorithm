@@ -73,6 +73,7 @@ int ArrayList::Delete(ItemType data) {
 			m_length--;
 			return 1;
 		}
+		GetNextItem(temp);
 	}
 	return 0;
 }
@@ -83,7 +84,7 @@ int ArrayList::Replace(ItemType data) {
 	GetNextItem(temp);
 	while(m_CurPointer != -1) {
 		if (temp.CompareByID(data) == EQUAL) {
-			temp.SetRecord(data.GetId(), data.GetName(), data.GetAddress());
+			m_Array[m_CurPointer].SetRecord(data.GetId(), data.GetName(), data.GetAddress());
 			return 1;
 		}
 	}

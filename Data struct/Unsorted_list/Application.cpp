@@ -25,6 +25,15 @@ void Application::Run()
 		case 5:	
 			WriteDataToFile();
 			break;
+		case 6:
+			RetrieveStudent();
+			break;
+		case 7:
+			DeleteStudent();
+			break;
+		case 8:
+			Replace();
+			break;
 		case 0:
 			return;
 		default:
@@ -44,6 +53,9 @@ int Application::GetCommand()
 	cout << "\t   3 : Make empty list" << endl;
 	cout << "\t   4 : Get from file" << endl; 
 	cout << "\t   5 : Put to file " << endl; 
+	cout << "\t   6 : Retrieve data by ID " << endl; 
+	cout << "\t   7 : Delete data by ID " << endl; 
+	cout << "\t   8 : Replace data by ID" << endl; 
 	cout << "\t   0 : Quit" << endl; 
 
 	cout << endl << "\t Choose a Command--> ";
@@ -154,4 +166,41 @@ int Application::WriteDataToFile()
 	m_OutFile.close();
 
 	return 1;
+}
+
+int Application::RetrieveStudent() {
+	ItemType getItem;
+	cout << "\t  << Enter ID of student >>" << endl;
+	getItem.SetIdFromKB();
+	if (m_List.Get(getItem)) {
+		cout << "\t\t<Information about " << getItem.GetId() << ">\n";
+		getItem.DisplayRecordOnScreen();
+		return 1;
+	}
+	cout << "\t\t<No such information found>\n";
+	return 0;
+}
+
+int Application::DeleteStudent() {
+	ItemType getItem;
+	cout << "\t  << Enter ID of student >>" << endl;
+	getItem.SetIdFromKB();
+	if (m_List.Delete(getItem)) {
+		cout << "\t\t<Delete Success>\n";
+		return 1;
+	}
+	cout << "\t\t<No such information found>\n";
+	return 0;
+}
+
+int Application::Replace() {
+	ItemType getItem;
+	cout << "\t  << Enter ID of student >>" << endl;
+	getItem.SetRecordFromKB();
+	if (m_List.Replace(getItem)) {
+		cout << "\t\t<Replace Success>\n";
+		return 1;
+	}
+	cout << "\t\t<No such information found>\n";
+	return 0;
 }

@@ -27,7 +27,7 @@ void ItemType::SetAddress(string inAddress) {
 void ItemType::SetRecord(int inId, string inName, string inAddress) {
 	m_Id = inId;
 	m_sName = inName;
-	m_sAddress = m_sAddress;
+	m_sAddress = inAddress;
 }
 
 void ItemType::DisplayIdOnScreen() {

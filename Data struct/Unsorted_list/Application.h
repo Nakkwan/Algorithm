@@ -38,6 +38,12 @@ public:
 	int ReadDataFromFile();
 
 	int WriteDataToFile();
+
+	int RetrieveStudent();
+
+	int DeleteStudent();
+
+	int Replace();
 	
 private:
 	ifstream m_InFile;		///< input file descriptor.
