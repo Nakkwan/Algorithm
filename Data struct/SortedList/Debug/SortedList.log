@@ -1,3 +1,0 @@
-﻿  Application.cpp
-C:\Users\cvvc1\Desktop\Algorithm\Data struct\SortedList\Application.cpp(204,6): warning C4101: 'id' :참조되지 않은 지역 변수입니다.
-  SortedList.vcxproj -> C:\Users\cvvc1\Desktop\Algorithm\Data struct\SortedList\Debug\SortedList.exe
