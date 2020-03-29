@@ -56,6 +56,9 @@ int SortedListType::Add(const ItemType& data) {
 				complete = true;
 				break;
 			}
+			else {
+				return 0;
+			}
 		}
 		if (complete == false) {
 			m_length++;
