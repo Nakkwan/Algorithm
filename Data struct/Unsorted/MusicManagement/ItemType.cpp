@@ -84,9 +84,8 @@ void ItemType::SetLabelFromKB() {
 }
 
 void ItemType::SetGenreFromKB() {
-	int temp;
 	cout << "Genre (0:Unknown, 1:SONG, 2:Musical, 3:Rap, 4:R&B): ";
-	cin >> temp;
+	cin >> genre;
 }
 
 void ItemType::SetRecordFromKB() {
@@ -122,5 +121,17 @@ int ItemType::WriteDataToFile(ofstream& fout) {
 	}
 	else {
 		return 0;
+	}
+}
+
+RelationType ItemType::CompareByLabel(const ItemType& data) {
+	if (this->GetLabel() == data.GetLabel()) {
+		return EQUAL;
+	}
+	else if (this->GetLabel() > data.GetLabel()) {
+		return GREATER;
+	}
+	else {
+		return LESS;
 	}
 }
