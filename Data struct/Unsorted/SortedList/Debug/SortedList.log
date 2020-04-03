@@ -1,5 +1,0 @@
-﻿  Application.cpp
-C:\Users\cvvc1\Desktop\Algorithm\Data struct\Unsorted\SortedList\Application.cpp(204,6): warning C4101: 'id' :참조되지 않은 지역 변수입니다.
-  SortedListType.cpp
-  코드를 생성하고 있습니다...
-  SortedList.vcxproj -> C:\Users\cvvc1\Desktop\Algorithm\Data struct\Unsorted\SortedList\Debug\SortedList.exe
