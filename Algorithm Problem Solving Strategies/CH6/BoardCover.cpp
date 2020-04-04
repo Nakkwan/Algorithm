@@ -5,9 +5,9 @@ using namespace std;
 #define MAX_HEIGHT 21
 
 int firstX[4] = { 1, 1, 0, 0 };
-int firstY[4] = { 0, 0, -1, -1 };
+int firstY[4] = { 0, 0, 1, 1 };
 int secondX[4] = { 0, 1, 1, -1 };
-int secondY[4] = { -1, -1, -1, -1 };
+int secondY[4] = { 1, 1, 1, 1 };
 
 int gameboard(int (*matrix)[MAX_WIDTH], int hei, int wid) {
 	int count = 0;
@@ -16,8 +16,8 @@ int gameboard(int (*matrix)[MAX_WIDTH], int hei, int wid) {
 	for (int i = 0; i < hei; i++) {
 		for (int j = 0; j < wid; j++) {
 			if (matrix[i][j] == 1) {
-				locX = i;
-				locY = j;
+				locY = i;
+				locX = j;
 				break;
 			}
 		}
@@ -32,14 +32,14 @@ int gameboard(int (*matrix)[MAX_WIDTH], int hei, int wid) {
 		int x2 = locX + secondX[k];
 		int y2 = locY + secondY[k];
 		if (x1 >= 0 && x2 >= 0 && y1 >= 0 && y2 >= 0) {
-			if (matrix[x1][y1] == 1 && matrix[x2][y2] == 1) {
-				matrix[locX][locY] = 0;
-				matrix[x1][y1] = 0;
-				matrix[x2][y2] = 0;
+			if (matrix[y1][x1] == 1 && matrix[y2][x2] == 1) {
+				matrix[locY][locX] = 0;
+				matrix[y1][x1] = 0;
+				matrix[y2][x2] = 0;
 				count += gameboard(matrix, hei, wid);
-				matrix[locX][locY] = 1;
-				matrix[x1][y1] = 1;
-				matrix[x2][y2] = 1;
+				matrix[locY][locX] = 1;
+				matrix[y1][x1] = 1;
+				matrix[y2][x2] = 1;
 			}
 		}
 	}
