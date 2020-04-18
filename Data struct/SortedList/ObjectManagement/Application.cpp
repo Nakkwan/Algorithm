@@ -7,28 +7,28 @@ void Application::Run() {
 
 		switch (m_Command)
 		{
-		case 1:		// 곡 정보를 입력 받아 리스트에 추가			
+		case 1:		// 물건의 정보를 입력 받아 리스트에 추가			
 			AddObject();
 			break;
-		case 2:		// 곡의 고유번호를 입력 받아 리스트에서 삭제				
+		case 2:		// 물건의 고유번호를 입력 받아 리스트에서 삭제				
 			DeleteObject();
 			break;
-		case 3:		// 곡 정보를 입력 받아서 리스트에서 해당 곡 정보를 갱신		
+		case 3:		// 물건 정보를 입력 받아서 리스트에서 해당 곡 정보를 갱신		
 			ReplaceObject();
 			break;
-		case 4:		// 입력된 정보로 리스트에서 곡을 찾아서 화면에 출력			
+		case 4:		// 라벨로 리스트에서 물건을 찾아서 화면에 출력			
 			RetrieveObject();
 			break;
-		case 5:		// 입력된 정보로 리스트에서 곡을 찾아서 화면에 출력			
+		case 5:		// 물건의 이름으로 리스트에서 물건을 찾아서 화면에 출력			
 			RetrieveObjectByName();
 			break;
-		case 6:		// 입력된 정보로 리스트에서 곡을 찾아서 화면에 출력			
+		case 6:		// 물건의 종류로 리스트에서 곡을 찾아서 화면에 출력			
 			RetrieveObjectByType();
 			break;
-		case 7:		// 리스트에 저장된 모든 곡을 화면에 출력
+		case 7:		// 리스트에 저장된 모든 물건을 화면에 출력
 			DisplayAllObject();
 			break;
-		case 8: 		// 리스트에 입력된 모든 곡을 삭제
+		case 8: 		// 리스트에 입력된 모든 물건을 삭제
 			MakeEmpty();
 			break;
 		case 9:		// load list data from a file.
@@ -47,7 +47,7 @@ void Application::Run() {
 }
 
 int Application::GetCommand() {
-	cout << "\t\t<<Music Management>>\n\n";
+	cout << "\t\t<<Object Management>>\n\n";
 	cout << "\t1 : Add Object\n";
 	cout << "\t2 : Delete Object\n";
 	cout << "\t3 : Replace Object\n";
@@ -165,10 +165,10 @@ int Application::RetrieveObjectByName() {
 	int len = m_List.GetLength();
 
 	while (pointer < len && pointer != -1) {
-		if (element.GetName() == data.GetName()) {
+		if (element.GetName().find(data.GetName()) != string::npos) {			//검색할 내용을 포함했다면
 			count++;
 			cout << count << ".\n";
-			element.DisplayRecordOnScreen();
+			element.DisplayRecordOnScreen();					//출력
 		}
 		pointer = m_List.GetNextItem(element);
 	}

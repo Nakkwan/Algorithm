@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Item">
+      <UniqueIdentifier>{96f8c821-165f-4e11-acca-4d29ed14a3e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DS">
+      <UniqueIdentifier>{730d1f6a-4b7e-4275-9b0f-02c73522918b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Type">
+      <UniqueIdentifier>{0baa45f6-2ef7-47ce-bf4d-af95878b6a18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="List">
+      <UniqueIdentifier>{b7f29d54-8539-431d-8a03-1a4a069f569f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application">
+      <UniqueIdentifier>{a6a394d6-bf80-4dce-a3e9-03c0494ba016}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base">
+      <UniqueIdentifier>{6ba762a4-2127-45be-b7f9-ef353922b168}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ItemType.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleItemType.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Base.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="TempList.cpp">
+      <Filter>List</Filter>
+    </ClCompile>
+    <ClCompile Include="ContainerType.cpp">
+      <Filter>Type</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawerType.cpp">
+      <Filter>Type</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomType.cpp">
+      <Filter>Type</Filter>
+    </ClCompile>
+    <ClCompile Include="RecentList.cpp">
+      <Filter>List</Filter>
+    </ClCompile>
+    <ClCompile Include="BestList.cpp">
+      <Filter>List</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ItemType.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleItemType.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Stack.h">
+      <Filter>DS</Filter>
+    </ClInclude>
+    <ClInclude Include="Queue.h">
+      <Filter>DS</Filter>
+    </ClInclude>
+    <ClInclude Include="SortedList.h">
+      <Filter>DS</Filter>
+    </ClInclude>
+    <ClInclude Include="UnsortedList.h">
+      <Filter>DS</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkedQueue.h">
+      <Filter>DS</Filter>
+    </ClInclude>
+    <ClInclude Include="Base.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="TempList.h">
+      <Filter>List</Filter>
+    </ClInclude>
+    <ClInclude Include="ContainerType.h">
+      <Filter>Type</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawerType.h">
+      <Filter>Type</Filter>
+    </ClInclude>
+    <ClInclude Include="RoomType.h">
+      <Filter>Type</Filter>
+    </ClInclude>
+    <ClInclude Include="RecentList.h">
+      <Filter>List</Filter>
+    </ClInclude>
+    <ClInclude Include="BestList.h">
+      <Filter>List</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

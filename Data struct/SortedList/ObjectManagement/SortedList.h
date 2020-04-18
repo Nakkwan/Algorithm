@@ -1,5 +1,5 @@
-#ifndef ARRAYLIST_H
-#define ARRAYLIST_H
+#ifndef SORTEDLIST_H
+#define SORTEDLIST_H
 #define MAXSIZE 50
 
 #include <iostream>
@@ -17,9 +17,9 @@ public:
 	~SortedList() {};	//destructor
 
 	/*
-	@brief: add element data to array
-	@pre: set element data
-	@post: data added to array
+	@brief: add data tot array
+	@pre: set data
+	@post: data added to array sorted by size in ascending order
 	@param: ItemType to add the array
 	@return: return 1 if add success, return 0 if fail to add
 	*/
@@ -73,32 +73,28 @@ public:
 	int GetNextItem(ItemType& data);
 
 	/*
-	@brief: Get data from list correspond with label
-	@pre: set uinque label for finding
+	@brief: Get data from list correspond with parameter
+	@pre: set ItemType for finding, and sorted list 
 	@post: parameter assigned data of list
 	@param: ItemType that receive array data
 	@return: return 1 if array is empty, otherwise 0
 	*/
 	int Get(ItemType& data);
 
-	int GetByName(ItemType& data);
-
-	int GetByType(ItemType& data);
-
 	/*
-	@brief: delete element of list correspond with unique label
-	@pre: set unique label for delete
+	@brief: delete element of list correspond with parameter
+	@pre: set ItemType for delete
 	@post: element of list is deleted
-	@param: data that has unique label for delete
-	@return: return 1 if array is empty, otherwise 0
+	@param: ItemType for delete
+	@return: return 1 if delete success, otherwise 0
 	*/
 	int Delete(ItemType data);
 
 	/*
-	@brief: replace element of list correspond with unique label
-	@pre: set unique label for replace
+	@brief: replace element of list correspond with ItemType
+	@pre: set ItemType for replace
 	@post: element of list are replaced
-	@return: return 1 if array is empty, otherwise 0
+	@return: return 1 if replace success, otherwise 0
 	*/
 	int Replace(ItemType data);
 };

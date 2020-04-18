@@ -38,48 +38,58 @@ public:
 	int GetCommand();
 
 	/*
-	@brief: add music in list
-	@pre: set music
-	@post: music is added to list
+	@brief: add object in list
+	@pre: set object
+	@post: object is added to list
 	*/
 	int AddObject();
 
 	/*
-	@brief: delete music in list
-	@pre: set unique label about delete
-	@post: music is deleted in list correspond with unique label
+	@brief: delete object in list
+	@pre: set object about delete
+	@post: object is deleted in list correspond with set object
 	*/
 	int DeleteObject();
 
 	/*
-	@brief: replace music in list
-	@pre: set music for replace
-	@post: music corresponding with set unique label is replaced
+	@brief: replace object in list
+	@pre: set object for replace
+	@post: object corresponding with set object is replaced
 	*/
 	int ReplaceObject();
 
 	/*
-	@brief: search music
+	@brief: search object by unique label
 	@pre: set unique label for search
-	@post: display searching music on screen
+	@post: display searching object on screen
 	*/
 	int RetrieveObject();
 
+	/*
+	@brief: Search for object of the applicable type
+	@pre: set type for searching
+	@post: display searching object on screen
+	*/
 	int RetrieveObjectByType();
 
+	/*
+	@brief: Search objects by allowing duplicate names
+	@pre: set name for searching
+	@post: display searching object on screen
+	*/
 	int RetrieveObjectByName();
 
 	/*
-	@brief: display all music in list
+	@brief: display all object in list
 	@pre: set list
-	@post: display music list in screen
+	@post: display object list in screen
 	*/
 	void DisplayAllObject();
 
 	/*
 	@brief: make list empty
 	@pre: none
-	@post: music list empty
+	@post: object list empty
 	*/
 	void MakeEmpty();
 
@@ -102,15 +112,15 @@ public:
 	/*
 	@brief: read data from file and add to list
 	@pre: set file for reading
-	@post: music is added to list and display all music on screen
+	@post: object is added to list and display all object on screen
 	@return: return 1 if success to add, otherwise 0
 	*/
 	int ReadDataFromFile();
 
 	/*
-	@brief: write data in music list to file
-	@pre: set music list
-	@post: data of music list are write to file
+	@brief: write data in object list to file
+	@pre: set object list
+	@post: data of object list are write to file
 	@return: return 1 if success to write, otherwise 0
 	*/
 	int WriteDataToFile();

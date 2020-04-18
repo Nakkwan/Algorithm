@@ -1,9 +1,11 @@
 #include "ItemType.h"
 
+int ItemType::O_Total = 0;
+
 string ItemType::GetName() const {
 	return O_Name;
 }
-int ItemType::GetBuyDate() const {
+string ItemType::GetBuyDate() const {
 	return O_BuyDate;
 }
 int ItemType::GetLabel() const {
@@ -18,7 +20,7 @@ int ItemType::GetVolume() const {
 void ItemType::SetName(string inName) {
 	O_Name = inName;
 }
-void ItemType::SetBuyDate(int inDate) {
+void ItemType::SetBuyDate(string inDate) {
 	O_BuyDate = inDate;
 }
 void ItemType::SetType(int inType) {
@@ -31,7 +33,7 @@ void ItemType::SetVolume(int inVolume) {
 	O_Volume = inVolume;
 }
 
-void ItemType::SetRecord(string inName, int inDate, int inType, int inLabel, int inVolume) {
+void ItemType::SetRecord(string inName, string inDate, int inType, int inLabel, int inVolume) {
 	O_Name = inName;
 	O_BuyDate = inDate;
 	O_Type = inType;
@@ -77,17 +79,23 @@ void ItemType::SetNameFromKB() {
 }
 
 void ItemType::SetDateFromKB() {
-	cout << "Date obtained: ";
+	cout << "Date obtained(YYMMDDHH): ";
 	cin >> O_BuyDate;
 }
 
 void ItemType::SetTypeFromKB() {
-	cout << "Type: ";
-	cin >> O_Type;
+	cout << "1.ÇÊ±â·ù\t2.Ã¥\n3.¾Ç¼¼·¯¸®\t4.È­ÀåÇ°\n5.°Ñ¿Ê\t\t6.»óÀÇ\n7.ÇÏÀÇ\t\t8.½Å¹ß\n";
+	while (O_Type == -1 || O_Type > 8) {
+		cout << "Type: ";
+		cin >> O_Type;
+		if (O_Type > 8) {
+			cout << "Error: Type_out of range\n";
+		}
+	}
 }
 
 void ItemType::SetLabelFromKB() {
-	cout << "Label(1:ÇÊ±â·ù, 2:Ã¥, 3:¾Ç¼¼¼­¸®, 4:Æ¼¼ÅÃ÷, 5:¹ÙÁö): ";
+	cout << "Label: ";
 	cin >> O_Label;
 }
 

@@ -22,68 +22,60 @@ public:
 	}			//destructor
 
 	/*
-	@brief: get music name
-	@pre: set music name
+	@brief: get object name
+	@pre: set object name
 	@post: none
-	@return: music name
+	@return: object name
 	*/
 	string GetName() const;
 
 	/*
-	@brief: get music writer
-	@pre: set writer
+	@brief: get object writer
+	@pre: set buy date
 	@post: none
-	@return: writer
+	@return: buy date
 	*/
-	int GetBuyDate() const;
+	string GetBuyDate() const;
 
 	/*
-	@brief: get singer 
-	@pre: set signer
+	@brief: get unique label 
+	@pre: set unique label
 	@post: none
-	@return: signer
+	@return: unique label
 	*/
 	int GetLabel() const;
 
 	/*
-	@brief: get unique label
-	@pre: set unique label
+	@brief: get type of object
+	@pre: set type
 	@post: none
-	@return: label
+	@return: type
 	*/
 	int GetType() const;
 
 	/*
-	@brief: get music genre
-	@pre: set genre
+	@brief: get number of object 
+	@pre: set volume
 	@post: none
-	@return: genre
+	@return: volume
 	*/
 	int GetVolume() const;
 
 	/*
-	@brief: set music name
+	@brief: set object name
 	@pre: none
-	@post: assign music name
-	@param: music name
+	@post: assign object name
+	@param: object name
 	*/
 	void SetName(string inName);
 
 	/*
-	@brief: set writer
+	@brief: set buy date of object
 	@pre: none
-	@post: assign writer
-	@param: writer
+	@post: assign buy date
+	@param: buy date
 	*/
-	void SetBuyDate(int inDate);
-
-	/*
-	@brief: set singer
-	@pre: none
-	@post: assign singer
-	@param: singer
-	*/
-	void SetLabel(int inLabel);
+	void SetBuyDate(string inDate);
 
 	/*
 	@brief: set unique label
@@ -91,29 +83,37 @@ public:
 	@post: assign unique label
 	@param: label
 	*/
+	void SetLabel(int inLabel);
+
+	/*
+	@brief: set type
+	@pre: none
+	@post: assign type of object
+	@param: type
+	*/
 	void SetType(int inType);
 
 	/*
-	@brief: set music genre
+	@brief: set number of object
 	@pre: none
-	@post: assign genre
-	@param: genre
+	@post: assign number of object
+	@param: object number
 	*/
 	void SetVolume(int inVolume);
 
 	/*
 	@brief: set elememt of ItemType member value
 	@pre: none
-	@post: assign name, writer, singer, label, genre
-	@param: _inName name, _inWriter writer, _inSinger singer, _inLabel label, _inGenre genre 
+	@post: assign name, buydate, label, type, volume
+	@param: _inName name, _inBuyDate BuyDate, _inLabel label, _inType Type, _inVolume volume
 	*/
-	void SetRecord(string inName, int inBuyDate, int inLabel, int inType, int inVolume);
+	void SetRecord(string inName, string inBuyDate, int inLabel, int inType, int inVolume);
 
 	/*
 	@brief: set elememt of ItemType member value
 	@pre: none
-	@post: assign name, writer, singer, label, genre
-	@param: _inName name, _inWriter writer, _inSinger singer, _inLabel label, _inGenre genre
+	@post: assign ItemType
+	@param: ItemType for assign member value
 	*/
 	void SetRecordByItem(const ItemType& data);
 
@@ -125,72 +125,72 @@ public:
 	void DisplayNameOnScreen();
 
 	/*
-	@brief: display writer of ItemType on screen
-	@pre: set writer
-	@post: display writer
+	@brief: display buy date of ItemType on screen
+	@pre: set buy date
+	@post: display buy date
 	*/
 	void DisplayDateOnScreen();
-
-	/*
-	@brief: display singer of ItemType on screen
-	@pre: set singer 
-	@post: display singer 
-	*/
-	void DisplayLabelOnScreen();
 
 	/*
 	@brief: display label of ItemType on screen
 	@pre: set label
 	@post: display label
 	*/
+	void DisplayLabelOnScreen();
+
+	/*
+	@brief: display type of ItemType on screen
+	@pre: set type
+	@post: display type
+	*/
 	void DisplayTypeOnScreen();
 
 	/* 
-	@brief: display genre of ItemType on screen
-	@pre: set genre
-	@post: display genre
+	@brief: display volume of ItemType on screen
+	@pre: set volume
+	@post: display volume
 	*/
 	void DisplayVolumeOnScreen();
 
 	/*
 	@brief: display member value of ItemType on screen
-	@pre: set name, writer, singer, label, genre
+	@pre: set name, buydate, label, type, volume
 	@post: display member value of ItemType
 	*/
 	void DisplayRecordOnScreen();
 
 	/*
-	@brief: set name of music receive input from keyboard
+	@brief: set name of object receive input from keyboard
 	@pre: none
 	@post: assign name from the keyboard
 	*/
 	void SetNameFromKB();
 
 	/*
-	@brief: set writer receive input from keyboard
+	@brief: set buy date receive input from keyboard
 	@pre: none
-	@post: assign writer from the keyboard
+	@post: assign buy date from the keyboard
 	*/
 	void SetDateFromKB();
-
-	/*
-	@brief: set singer receive input from keyboard
-	@pre: none
-	@post: assign singer from the keyboard
-	*/
-	void SetLabelFromKB();
 
 	/*
 	@brief: set label receive input from keyboard
 	@pre: none
 	@post: assign label from the keyboard
 	*/
+	void SetLabelFromKB();
+
+	/*
+	@brief: set type receive input from keyboard
+	@pre: none
+	@post: assign type from the keyboard
+	*/
 	void SetTypeFromKB();
 
 	/*
-	@brief: set genre receive input from keyboard
+	@brief: set number of object receive input from keyboard
 	@pre: none
-	@post: assign genre from the keyboard
+	@post: assign volume from the keyboard
 	*/
 	void SetVolumeFromKB();
 
@@ -220,7 +220,7 @@ public:
 	int WriteDataToFile(std::ofstream& fout);
 
 	/*
-	@brief: Get number of total type of object
+	@brief: Get number of total number of different object
 	@pre: set Total number of object
 	@post: none
 	@return: get number of object
@@ -246,7 +246,7 @@ public:
 	@return: if same, return 1 if differ, return 0
 	*/
 	bool operator==(const ItemType& data) {			//제너릭하게 프로그램을 구성하기 위해서 RelationType 대신 연산자 오버로딩
-		if (O_Label = data.GetLabel()) {
+		if (this->O_Label == data.GetLabel()) {
 			return true;
 		}
 		else {
@@ -254,8 +254,15 @@ public:
 		}
 	}
 
-	bool operator>(const ItemType& data) {			//제너릭하게 프로그램을 구성하기 위해서 RelationType 대신 연산자 오버로딩
-		if (O_Label > data.GetLabel()) {
+	/*
+	@brief: Decide if current itemtype is bigger
+	@pre: set unique label of two object
+	@post: none
+	@param: ItemType for compare
+	@return: if bigger, return 1 if smaller, return 0
+	*/
+	bool operator>(const ItemType& data) {			
+		if (this->O_Label > data.GetLabel()) {
 			return true;
 		}
 		else {
@@ -263,8 +270,15 @@ public:
 		}
 	}
 
-	bool operator<(const ItemType& data) {			//제너릭하게 프로그램을 구성하기 위해서 RelationType 대신 연산자 오버로딩
-		if (O_Label < data.GetLabel()) {
+	/*
+	@brief: Decide if current itemtype is smaller
+	@pre: set unique label of two object
+	@post: none
+	@param: ItemType for compare
+	@return: if smaller, return 1 if bigger, return 0
+	*/
+	bool operator<(const ItemType& data) {			
+		if (this->O_Label < data.GetLabel()) {
 			return true;
 		}
 		else {
@@ -289,12 +303,10 @@ public:
 private:
 	string O_Name; 
 	int O_Label;
-	int O_BuyDate;
+	string O_BuyDate;
 	int O_Type;
 	int O_Volume;
 	static int O_Total;
 };
-
-int ItemType::O_Total = 0;
 
 #endif
