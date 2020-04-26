@@ -101,5 +101,14 @@
     <ClInclude Include="BestList.h">
       <Filter>List</Filter>
     </ClInclude>
+    <ClInclude Include="DoublySortedLinkedList.h">
+      <Filter>DS</Filter>
+    </ClInclude>
+    <ClInclude Include="DoublyIterator.h">
+      <Filter>DS</Filter>
+    </ClInclude>
+    <ClInclude Include="SingleLinkedList.h">
+      <Filter>DS</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

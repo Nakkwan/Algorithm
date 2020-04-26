@@ -100,4 +100,155 @@ public:
 	*/
 	int getSize();
 };
+
+
+template<typename T>
+Stack<T>::Stack() {
+	S_stack = new T[MAXSTACK];
+	S_size = MAXSTACK;
+	S_top = -1;
+	cur_Pointer = -1;
+}
+
+template<typename T>
+Stack<T>::Stack(int size) {
+	S_stack = new T[size];
+	S_size = size;
+	S_top = -1;
+	cur_Pointer = -1;
+}
+
+template<typename T>
+Stack<T>::~Stack() {
+	delete[] S_stack;
+}
+
+template<typename T>
+void Stack<T>::MakeEmpty() {
+	S_top = -1;
+}
+
+template<typename T>
+bool Stack<T>::IsFull() {
+	if (S_top == S_size - 1) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+template<typename T>
+bool Stack<T>::IsEmpty() {
+	if (S_top == -1) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+template<typename T>
+int Stack<T>::Push(T data) {
+	if (IsFull()) {						//배열이 꽉 차면 에러
+		cout << "Error: Stack is already full\n";
+		return 0;
+	}
+	else {
+		S_top++;
+		S_stack[S_top] = data;
+	}
+	return 1;
+}
+
+template<typename T>
+int Stack<T>::Pop(T& data) {
+	if (IsEmpty()) {						//배열이 비었으면 에러
+		cout << "Error: Stack is already empty\n";
+		return 0;
+	}
+	else {
+		data = S_stack[S_top];
+		S_top--;
+	}
+	return 1;
+}
+
+template<typename T>
+void Stack<T>::ResetStack() {
+	cur_Pointer = -1;
+}
+
+template<typename T>
+int Stack<T>::GetNextItem(T& data) {
+	if (cur_Pointer == S_top) {				//포인터가 stack의 꼭대기에 도달했으면 -1로 만듦
+		cur_Pointer = -1;
+		return cur_Pointer;
+	}
+	else {
+		cur_Pointer++;						//포인터를 증가시킨 후 값 반환
+		data = S_stack[cur_Pointer];
+		return cur_Pointer;
+	}
+}
+
+template<typename T>
+int Stack<T>::Get(T& data) {
+	T temp;
+	ResetStack();
+	GetNextItem(temp);
+	while (cur_Pointer != -1) {
+		if (temp == data) {				//찾는 데이터가 있다면
+			data = temp;				//reference로 반환
+			return 1;
+		}
+		else {
+			GetNextItem(temp);
+		}
+	}
+	return 0;
+}
+
+template<typename T>
+int Stack<T>::Replace(T data) {
+	T temp;
+	ResetStack();
+	GetNextItem(temp);
+	while (cur_Pointer != -1) {
+		if (temp == data) {						//바꿀 데이터를 찾았으면
+			S_stack[cur_Pointer] = data;		//데이터를 바꿔줌
+			return 1;
+		}
+		else {
+			GetNextItem(temp);					//해당 데이터가 아닐 시, 다음 값 설정
+		}
+	}
+	return 0;
+}
+
+template<typename T>
+int Stack<T>::Delete(T data) {
+	T temp;
+	ResetStack();
+	GetNextItem(temp);
+	while (cur_Pointer != -1) {
+		if (temp == data) {										//삭제할 데이터가 있으면
+			for (int i = cur_Pointer; i < S_top; i++) {			//top부터 해당 포인터까지 값을 하나씩 내려줌
+				S_stack[i] = S_stack[i + 1];
+			}
+			S_top--;
+			return 1;
+		}
+		else {
+			GetNextItem(temp);
+		}
+	}
+	return 0;
+}
+
+template<typename T>
+int Stack<T>::getSize() {
+	return S_top;
+}
+
 #endif

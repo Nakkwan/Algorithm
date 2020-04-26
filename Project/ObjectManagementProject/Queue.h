@@ -104,4 +104,177 @@ public:
 	*/
 	int Replace(T data);
 };
+
+
+template<typename T>
+Queue<T>::Queue() {
+	Q_item = new T[MAXQUEUE];
+	Q_size = MAXQUEUE - 1;
+	Q_head = Q_size;
+	Q_tail = Q_size;
+	Q_curSize = 0;
+	Q_curPointer = -1;
+}
+
+template<typename T>
+Queue<T>::Queue(int size) {
+	Q_item = new T[size + 1];
+	Q_size = size;
+	Q_head = Q_size;
+	Q_tail = Q_size;
+	Q_curPointer = -1;
+	Q_curSize = 0;
+}
+
+template<typename T>
+Queue<T>::~Queue() {
+	delete[] Q_item;
+}
+
+template<typename T>
+void Queue<T>::MakeEmpty() {
+	Q_head = Q_size;
+	Q_tail = Q_size;
+	Q_curSize = 0;
+}
+
+template<typename T>
+bool Queue<T>::IsFull() {
+	if (Q_curSize == Q_size) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+template<typename T>
+bool Queue<T>::IsEmpty() {
+	if (Q_curSize == 0) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+template<typename T>
+int Queue<T>::Enqueue(T data) {					//추가
+	if (IsFull()) {
+		cout << "Error: Queue is already full\n";
+		return 0;
+	}
+	else {										//queue가 꽉차지 않았다면
+		Q_head = (Q_head + 1) % (Q_size + 1);	//head를 다음칸으로 넘기고
+		Q_item[Q_head] = data;					//할당
+		Q_curSize += 1;
+	}
+	return 1;
+}
+
+template<typename T>
+int Queue<T>::Dequeue(T& data) {
+	if (IsEmpty()) {
+		cout << "Error: Queue is already empty\n";
+		return 0;
+	}
+	else {							//비어있지 않다면
+		Q_tail = (Q_tail + 1) % (Q_size + 1);	//Q_tail을 다음칸으로 넘기고
+		data = Q_item[Q_tail];						//값 반환 후
+		Q_curSize--;							//현재 queue 사이즈 줄임
+	}
+	return 1;
+}
+
+template<typename T>
+int Queue<T>::GetSize() {
+	return Q_curSize;
+}
+
+template<typename T>
+void Queue<T>::ResetQueue() {
+	Q_curPointer = Q_tail;
+}
+
+template<typename T>
+int Queue<T>::GetNextItem(T& data) {
+	if (Q_curPointer == Q_head) {					//head랑 같아졌다면
+		Q_curPointer = Q_tail;							//-1 반환(-1은 배열엔 없는 수이기 때문)
+		return Q_curPointer;
+	}
+	else {
+		Q_curPointer = (Q_curPointer + 1) % (Q_size + 1);
+		data = Q_item[Q_curPointer];
+		return Q_curPointer;
+	}
+}
+
+template<typename T>
+int Queue<T>::Get(T& data) {
+	T temp;
+	ResetQueue();
+	GetNextItem(temp);
+	while (Q_curPointer != Q_tail) {
+		if (temp == data) {
+			data = temp;
+			return 1;
+		}
+		else {
+			GetNextItem(temp);
+		}
+	}
+	return 0;
+}
+
+template<typename T>
+int Queue<T>::Delete(const T& data) {
+	T temp;
+	ResetQueue();
+	GetNextItem(temp);
+	if (IsEmpty()) {
+		return 0;
+	}
+	else {
+		while (Q_curPointer != Q_tail) {
+			if (temp == data) {				//지울 item을 찾았다면
+				int i = Q_curPointer;
+				int j;
+				while (i != ((Q_tail + 1) % (Q_size + 1))) {		//tail과 같아질 때까지
+					if (i > 0) {
+						j = i - 1;
+					}
+					else {
+						j = Q_size;
+					}
+					Q_item[i] = Q_item[j];		//아이템 당기기
+					i = j;
+				}
+				Q_size--;
+				Q_tail = (Q_tail + 1) % (Q_size + 1);
+				return 1;
+			}
+			else {
+				GetNextItem(temp);
+			}
+		}
+	}
+	return 0;
+}
+
+template<typename T>
+int Queue<T>::Replace(T data) {
+	T temp;
+	ResetQueue();
+	GetNextItem(temp);
+	while (Q_curPointer != -1) {
+		if (temp == data) {
+			Q_item[Q_curPointer] = data;
+			return 1;
+		}
+		else {
+			GetNextItem(temp);
+		}
+	}
+	return 0;
+}
 #endif

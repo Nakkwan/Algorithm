@@ -1,6 +1,9 @@
 #ifndef __ITEMTYPE_H
 #define __ITEMTYPE_H
 #include <string>
+#include <iostream>
+#include <fstream>
+#include "SingleLinkedList.h"
 using namespace std;
 
 
@@ -10,9 +13,13 @@ public:
 		O_Name = "";
 		O_BuyDate = -1;
 		O_Label = -1;
-		O_Type = -1;
+		O_Type = "";
 		O_Volume = -1;
+		O_SearchNum = -1;
 		O_Total++;
+		O_RoomID = -1;
+		O_DrawerID = -1;
+		O_ContainerID = -1;
 	}
 	~ItemType() {
 		O_Total--;
@@ -32,7 +39,7 @@ public:
 	@post: none
 	@return: buy date
 	*/
-	string GetBuyDate() const;
+	int GetBuyDate() const;
 
 	/*
 	@brief: get unique label
@@ -48,7 +55,7 @@ public:
 	@post: none
 	@return: type
 	*/
-	int GetType() const;
+	string GetType() const;
 
 	/*
 	@brief: get number of object
@@ -96,7 +103,7 @@ public:
 	@post: assign buy date
 	@param: buy date
 	*/
-	void SetBuyDate(string inDate);
+	void SetBuyDate(int inDate);
 
 	/*
 	@brief: set unique label
@@ -106,13 +113,19 @@ public:
 	*/
 	void SetLabel(int inLabel);
 
+	void SetContainerID();
+	
+	void SetDrawerID();
+
+	void SetRoomID();
+
 	/*
 	@brief: set type
 	@pre: none
 	@post: assign type of object
 	@param: type
 	*/
-	void SetType(int inType);
+	void SetType(string inType);
 
 	/*
 	@brief: set number of object
@@ -122,13 +135,15 @@ public:
 	*/
 	void SetVolume(int inVolume);
 
+	
+
 	/*
 	@brief: set elememt of ItemType member value
 	@pre: none
 	@post: assign name, buydate, label, type, volume
 	@param: _inName name, _inBuyDate BuyDate, _inLabel label, _inType Type, _inVolume volume
 	*/
-	void SetRecord(string inName, string inBuyDate, int inLabel, int inType, int inVolume);
+	void SetRecord(string inName, int inDate, string inType, int inLabel, int inVolume);
 
 	/*
 	@brief: set elememt of ItemType member value
@@ -215,6 +230,8 @@ public:
 	*/
 	void SetDateFromKB();
 
+	bool CheckDate(int year, int month, int day);
+
 	/*
 	@brief: set label receive input from keyboard
 	@pre: none
@@ -229,6 +246,8 @@ public:
 	*/
 	void SetTempLabelFromKB();
 
+	void DisplayTypeList();	
+
 	/*
 	@brief: set type receive input from keyboard
 	@pre: none
@@ -242,6 +261,12 @@ public:
 	@post: assign volume from the keyboard
 	*/
 	void SetVolumeFromKB();
+
+	void SetContainerIDFromKB();
+
+	void SetDrawerIDFromKB();
+
+	void SetRoomIDFromKB();
 
 	/*
 	@brief: set member value of ItemType receive input from keyboard
@@ -283,6 +308,25 @@ public:
 	@return: get number of object
 	*/
 	int GetTotalObjectNum();
+
+	/*
+	@brief: °Ë»öÈ½¼ö¸¦ ´Ã¸°´Ù.
+	@pre: none
+	@post: increase O_SearchNum
+	*/
+	void AddSearchNum() {
+		O_SearchNum++;
+	}
+
+	/*
+	@brief: get searchNum
+	@pre: none
+	@post: none
+	@return: return O_searchNum
+	*/
+	int GetSearchNum() {
+		return O_SearchNum;
+	}
 
 	/*
 	@brief: Decide two ItemType is same
@@ -349,10 +393,15 @@ public:
 private:
 	string O_Name;
 	int O_Label;
-	string O_BuyDate;
-	int O_Type;
+	int O_BuyDate;
+	string O_Type;
 	int O_Volume;
+	int O_SearchNum;
+	int O_RoomID;
+	int O_DrawerID;
+	int O_ContainerID;
 	static int O_Total;
+	static SingleLinkedList<string> O_TypeList;
 };
 
 #endif

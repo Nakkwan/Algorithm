@@ -1,13 +1,14 @@
 #ifndef __SIMPLEITEMTYPE_H
 #define __SIMPLEITEMTYPE_H
 #include <string>
+#include <iostream>
 using namespace std;
 
 class SimpleItemType{
 private:
 	int S_label;						//저장된 아이템의 고유 번호
 	string S_name;						//아이템의 이름
-	int S_usage;						//아이템의 type
+	string S_type;						//아이템의 type
 public:
 	SimpleItemType();					//생성자
 	SimpleItemType(int inlabel);		//생성자
@@ -35,7 +36,7 @@ public:
 	@post: none
 	@rreturn: return integer correspond with usage
 	*/
-	int getUsage() const;
+	string getType() const;
 
 	/*
 	@brief: 고유 ID를 설정함
@@ -59,7 +60,7 @@ public:
 	@post: 물건의 용도가 설정됨
 	@param: 물건의 용도에 해당하는 integer
 	*/
-	void setUsage(int inusage);
+	void setType(string intype);
 
 	/*
 	@brief: SimpleItemType의 member value를 설정함
@@ -67,28 +68,9 @@ public:
 	@post: member value가 설정됨
 	@param: member value에 해당하는 object의 ID, name, usage
 	*/
-	void setRecord(int inlabel, string inname, int inusage);
+	void setRecord(int inlabel, string inname, string inusage);
 
-	/*
-	@brief: 물건의 고유 ID를 사용자로부터 받아옴
-	@pre: none
-	@post: 입력에 따른 ID가 설정됨
-	*/
-	void setLabelfromKB();
-
-	/*
-	@brief: 물건의 이름을 사용자로부터 받아옴
-	@pre: none
-	@post: 입력에 따른 물건의 이름이 설정됨
-	*/
-	void setNamefromKB();
-
-	/*
-	@brief: 물건의 용도를 사용자로부터 받아옴
-	@pre: none
-	@post: 입력에 물건의 용도가 설정됨
-	*/
-	void setUsagefromKB();
+	void SetRecordByType(const SimpleItemType& data);
 
 	/*
 	@brief: member value를 display
@@ -154,7 +136,7 @@ public:
 	void operator=(const SimpleItemType& data) {
 		S_label = data.getLabel();
 		S_name = data.getName();
-		S_usage = data.getUsage();
+		S_type = data.getType();
 	}
 };
 

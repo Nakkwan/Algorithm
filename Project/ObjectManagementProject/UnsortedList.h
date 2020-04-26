@@ -93,7 +93,7 @@ public:
 	@post: element of list are replaced
 	@return: return 1 if array is empty, otherwise 0
 	*/
-	int Replace(T data);
+	int Replace(const T& data);
 
 	/*
 	@brief: Get Item according to index
@@ -102,5 +102,166 @@ public:
 	@param: UnsortedList Type, index
 	*/
 	int GetItemByIndex(T& data, int idx) const;
+
+	void operator=(const UnsortedList& data) {
+		delete[] m_Array;
+		m_length = data.m_length;
+		m_CurPointer = data.m_CurPointer;
+		Array_size = data.Array_size;
+		m_Array = new T[Array_size];
+		for (int i = 0; i < m_length; ++i) {
+			m_Array[i] = data.m_Array[i];
+		}
+	}
 };
+
+
+template<typename T>
+UnsortedList<T>::UnsortedList() {			//변수 없는 동적 할당
+	m_CurPointer = -1;
+	m_length = 0;
+	m_Array = new T[MAXSIZE];
+	Array_size = MAXSIZE;
+}
+
+template<typename T>
+UnsortedList<T>::UnsortedList(int size) {		//size를 준 동적할당
+	m_CurPointer = -1;
+	m_length = 0;
+	m_Array = new T[size];
+	Array_size = size;
+}
+
+template<typename T>
+UnsortedList<T>::~UnsortedList() {				//소멸자
+	delete[] m_Array;
+}
+
+template<typename T>
+int UnsortedList<T>::Add(const T& data) {
+	if (!IsFull()) {		//배열이 꽉 차있지 않은지 확인
+		T temp;
+		ResetList();
+		GetNextItem(temp);
+		while (m_CurPointer != -1) {	//배열 전체 탐색
+			if (temp == data) {
+				return 0;
+			}
+			GetNextItem(temp);
+		}
+
+		m_Array[m_length] = data;
+		m_length++;
+		return 1;
+	}
+	else {
+		cout << "Error: List if full\n";
+		return 0;
+	}
+}
+
+template<typename T>
+void UnsortedList<T>::MakeEmpty() {
+	m_length = 0;
+	delete[] m_Array;
+}
+
+template<typename T>
+int UnsortedList<T>::GetLength() {
+	return m_length;
+}
+
+template<typename T>
+bool UnsortedList<T>::IsFull() {
+	if (m_length == Array_size) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+
+template<typename T>
+bool UnsortedList<T>::IsEmpty() {
+	if (m_length == 0) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+
+template<typename T>
+int UnsortedList<T>::GetNextItem(T& data) {		//현재 포인터를 반환하고, 레퍼런스로 데이터를 돌려줌
+	m_CurPointer++;
+	if (m_CurPointer == m_length) {				//배열의 한계치와 같다면 -1로 리턴
+		m_CurPointer = -1;
+		return m_CurPointer;
+	}
+	data = m_Array[m_CurPointer];				//-1부터 시작이기 때문에 먼저 ++하고 데이터 할당
+	return m_CurPointer;
+}
+
+template<typename T>
+void UnsortedList<T>::ResetList() {
+	m_CurPointer = -1;
+}
+
+template<typename T>
+int UnsortedList<T>::Get(T& data) {				//data값이 같으면 reference로 값을 돌려줌
+	T temp;
+	ResetList();
+	GetNextItem(temp);
+	while (m_CurPointer != -1) {	//배열 전체 탐색
+		if (temp == data) {
+			data = temp;			//데이터 반환
+			return 1;
+		}
+		GetNextItem(temp);
+	}
+	return 0;
+}
+
+template<typename T>
+int UnsortedList<T>::Delete(T data) {			//data값에 해당하는 값을 삭제함
+	T temp;
+	ResetList();
+	GetNextItem(temp);
+	while (m_CurPointer != -1) {
+		if (temp == data) {
+			for (int j = m_CurPointer; j < m_length - 1; j++) {
+				m_Array[j] = m_Array[j + 1];				//현재포인터까지 배열을 한단계씩 앞으로 당김
+			}
+			m_length--;
+			return 1;
+		}
+		GetNextItem(temp);
+	}
+	return 0;
+}
+
+template<typename T>
+int UnsortedList<T>::Replace(const T& data) {				//데이터 교체
+	T temp;
+	ResetList();
+	GetNextItem(temp);
+	while (m_CurPointer != -1) {
+		if (temp == data) {
+			m_Array[m_CurPointer] = data;
+			return 1;
+		}
+	}
+	return 0;
+}
+
+template<typename T>
+int UnsortedList<T>::GetItemByIndex(T& data, int idx) const {
+	if (idx < m_length && idx > -1) {				//index가 유효한 값이라면
+		data = m_Array[idx];						//reference로 반환
+	}
+	else {
+		return 0;
+	}
+	return 1;
+}
 #endif

@@ -8,8 +8,8 @@
 class ContainerType : public Base {
 private:
 	int C_ID;				//container의 ID
+	string C_Name;
 	string C_Type;			//container의 종류
-	string C_loc;			//container의 위치
 	int numOfPhoto;
 	int numOfitem;
 	UnsortedList<string> photoList;			//container의 사진의 경로 List
@@ -27,12 +27,12 @@ public:
 	int GetContainerID() const;
 
 	/*
-	@brief: Container의 위치 값 받기
-	@pre: Container의 위치가 설정되어 있어야함
+	@brief: Container의 종류 값 받기
+	@pre: Container의 종류가 설정되어 있어야함
 	@post: none
-	@return: Container Location return
+	@return: Container Type return
 	*/
-	string GetContainerLocation() const;
+	string GetContainerName() const;
 
 	/*
 	@brief: Container의 종류 값 받기
@@ -67,12 +67,12 @@ public:
 	void SetContainerID(int inID);
 
 	/*
-	@brief: Container의  위치 설정
+	@brief: Container의  이름 설정
 	@pre: none
-	@post: Container의 위치가 설정됨
-	@param: 설정할 Container 위치 string
+	@post: Container의 이름이 설정됨
+	@param: 설정할 Container 이름 string
 	*/
-	void SetContainerLocation(string inLoc);
+	void SetContainerName(string inName);
 
 	/*
 	@brief: Container의  종류 설정
@@ -88,22 +88,21 @@ public:
 	@post: container의 ID, 위치, 종류가 설정됨
 	@param: 설정할 Container의 ID(int), Location(string), Type(string)
 	*/
-	void SetContainerRecord(int inID, string inLoc, string inType);
-
+	void SetContainerRecord(int inID, string inName, string inType);
 
 	/*
-	@brief: ContainerID를 사용자로부터 입력받음
+	@brief: Container의 종류를 사용자로부터 입력받음
 	@pre: none
-	@post: ContainerID가 사용자로부터 입력받은 값으로 설정됨 (10~99)
+	@post: Container의 종류를 사용자로부터 받음
 	*/
 	void SetContainerIDfromKB();
 
 	/*
-	@brief: Container의 위치를 사용자로부터 입력받음
+	@brief: Container의 종류를 사용자로부터 입력받음
 	@pre: none
-	@post: Container의 위치값을 사용자로부터 받음
+	@post: Container의 종류를 사용자로부터 받음
 	*/
-	void SetContainerLocationfromKB();
+	void SetContainerNamefromKB();
 
 	/*
 	@brief: Container의 종류를 사용자로부터 입력받음
@@ -168,13 +167,12 @@ public:
 	*/
 	void UpdatePhoto(string pho);
 
-
 	/*
 	@brief: ItemList에 있는 물건이 모두 display됨
 	@pre: none
 	@post: ItemList에 있는 물건의 정보가 화면에 모두 display됨
 	*/
-	void DiplayAllItem();
+	void DisplayAllItem();
 
 	/*
 	@brief: PhotoList에 있는 Container의 사진이 모두 display됨
@@ -190,45 +188,7 @@ public:
 	*/
 	void DisplayContainer();
 
-
-	/*
-	@brief: Container에 있는 물건을 ID로 검색함
-	@pre: 찾을 물건이 존재해야 함
-	@post: 해당하는 물건의 간략한 정보가 화면에 Display됨
-	@return: 물건을 찾으면 1, 못찾으면 0을 return 함
-	*/
-	int FindByID(SimpleItemType& data);
-
-	/*
-	@brief: Container에 있는 물건을 이름으로 검색함
-	@pre: 찾을 물건이 존재해야 함
-	@post: 해당하는 물건의 간략한 정보가 화면에 Display됨
-	@return: 물건을 찾으면 1, 못찾으면 0을 return 함
-	*/
-	int FindByName(SimpleItemType& data);
-
-	/*
-	@brief: Container에 있는 물건을 용도로 검색함
-	@pre: 찾을 물건이 존재해야 함
-	@post: 해당하는 물건의 간략한 정보가 화면에 Display됨
-	@return: 물건을 찾으면 1, 못찾으면 0을 return 함
-	*/
-	int FindByUsage(SimpleItemType& data);
-
-	/*
-	@brief: ItemList에 있는 물건을 index로 검색함
-	@pre: index가 List의 범위 내에 있어야함
-	@post: 해당하는 물건이 reference로 반환됨
-	*/
-	void GetItemByIndex(SimpleItemType& data, int idx) const;
-
-	/*
-	@brief: PhotoList에 있는 사진의 경로를 index로 검색함
-	@pre: index가 List의 범위 내에 있어야함
-	@post: 해당하는 경로가 reference로 반환됨
-	*/
-	void GetPhotoByIndex(string& data, int idx) const;
-
+	void MakeConatinerEmpty();
 
 	/*
 	@brief: Container가 같은지 결정
@@ -283,24 +243,12 @@ public:
 	*/
 	void operator=(const ContainerType& data) {
 		C_ID = data.GetContainerID();
+		C_Name = data.GetContainerName();
 		C_Type = data.GetContainerType();
-		C_loc = data.GetContainerLocation();
 		numOfPhoto = data.GetNumOfPhoto();
 		numOfitem = data.GetNumOfItem();
-
-		SimpleItemType tempItem;				//ItemList를 할당받음
-		ItemList.MakeEmpty();
-		for (int i = 0; i < numOfitem; i++) {
-			data.GetItemByIndex(tempItem, i);
-			ItemList.Add(tempItem);
-		}
-
-		string tempStr;							//사진의 경로를 할당받음
-		photoList.MakeEmpty();
-		for (int i = 0; i < numOfPhoto; i++) {
-			data.GetPhotoByIndex(tempStr, i);
-			photoList.Add(tempStr);
-		}
+		ItemList = data.ItemList;
+		photoList = data.photoList;
 	}
 };
 
