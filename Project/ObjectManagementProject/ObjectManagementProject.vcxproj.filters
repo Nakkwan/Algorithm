@@ -54,6 +54,15 @@
     <ClCompile Include="BestList.cpp">
       <Filter>List</Filter>
     </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="MasterType.cpp">
+      <Filter>List</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomList.cpp">
+      <Filter>List</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ItemType.h">
@@ -109,6 +118,18 @@
     </ClInclude>
     <ClInclude Include="SingleLinkedList.h">
       <Filter>DS</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkedQueueIterator.h">
+      <Filter>DS</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="MasterType.h">
+      <Filter>List</Filter>
+    </ClInclude>
+    <ClInclude Include="RoomList.h">
+      <Filter>List</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

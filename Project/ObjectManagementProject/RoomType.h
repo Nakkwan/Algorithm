@@ -1,10 +1,8 @@
 #ifndef __ROOMTYPE_H
 #define __ROOMTYPE_H
 
-#include "Base.h"
-#include "DrawerType.h"
-#include "SortedList.h"
-#include <string>
+#include "pch.h"
+
 class RoomType : public Base {
 private:
 	int r_ID;
@@ -21,7 +19,7 @@ public:
 		r_curPointer = -1;
 	}
 
-	~RoomType() {};
+	~RoomType() {}
 	/*
 	@brief: Room의 고유 ID 값 받기
 	@pre: RoomID가 설정되어 있어야함
@@ -92,7 +90,7 @@ public:
 	@post: Room의 DrawerList에 Drawer가 추가됨.
 	@param: DrawerType for add
 	*/
-	void AddDrawer(const DrawerType& data);
+	int AddDrawer(DrawerType& data);
 
 	/*
 	@brief: Room에서 Drawer를 뺌
@@ -100,7 +98,7 @@ public:
 	@post: Room의 DrawerList에서 해당하는 Drawer가 삭제됨.
 	@param: DrawerType for delete
 	*/
-	void DeleteDrawer(DrawerType& data);
+	int DeleteDrawer(DrawerType& data);
 
 	/*
 	@brief: Room의 Drawer 정보를 갱신함
@@ -108,14 +106,16 @@ public:
 	@post: Room의 DrawerList에서 해당하는 Drawer의 정보가 갱신됨.
 	@param: DrawerType for update
 	*/
-	void UpdateDrawer(DrawerType& data);
+	int UpdateDrawer(DrawerType& data);
+
+	int GetDrawer(DrawerType& data);
 
 	/*
 	@brief: DrawerList에 있는 Drawer가 모두 display됨
 	@pre: none
 	@post: DrawerList에 있는 Drawer의 정보가 화면에 모두 display됨
 	*/
-	void DiplayAllDrawer();
+	void DisplayAllDrawer();
 
 	/*
 	@brief: Room의 정보를 모두 display
@@ -123,6 +123,44 @@ public:
 	@post: none
 	*/
 	void DisplayInfo();
+
+	void ResetList();
+
+	void MakeEmpty();
+
+	int GetNextDrawer(DrawerType& data);
+
+	bool operator>(const RoomType& data) {
+		if (r_ID > data.r_ID) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	bool operator<(const RoomType& data) {
+		if (r_ID < data.r_ID) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	bool operator==(const RoomType& data) {
+		if (r_ID == data.r_ID) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	void operator=(const RoomType& data) {
+		r_ID = data.r_ID;
+		r_Length = data.r_Length;
+		r_Name = data.r_Name;
+		r_curPointer = data.r_curPointer;
+		r_Array = data.r_Array;
+	}
 };
 
 

@@ -69,7 +69,7 @@ public:
 	@pre	item을 입력받는다.
 	@post	새로운 정보로 교체된다.
 	*/
-	int Replace(T& item);
+	int Replace(const T& item);
 
 	/*
 	@brief	입력받은 아이템의 정보와 비교하여 같은 리스트의 아이템을 가져온다.
@@ -220,7 +220,7 @@ int DoublySortedLinkedList<T>::Delete(T& item)
 
 // 입력받은 아이템의 정보를 교체한다.
 template <typename T>
-int DoublySortedLinkedList<T>::Replace(T& item)
+int DoublySortedLinkedList<T>::Replace(const T& item)
 {
 	DoublyIterator<T> itor(*this);
 	itor.Next(); // 다음으로 이동.

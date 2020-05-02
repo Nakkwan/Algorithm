@@ -20,7 +20,7 @@ public:
 	@param: ItemType to add the array
 	@return: return 1 if add success, return 0 if fail to add
 	*/
-	int Add(const T& data);
+	int Add(T& data);
 
 	/*
 	@brief: make array empty
@@ -93,7 +93,18 @@ public:
 	@post: element of list are replaced
 	@return: return 1 if replace success, otherwise 0
 	*/
-	int Replace(const T& data);
+	int Replace(T& data);
+
+	void operator=(const SortedList& data) {
+		delete[] m_Array;
+		m_size = data.m_size;
+		m_length = data.m_length;
+		m_CurPointer = data.m_CurPointer;
+		m_Array = new T[m_size];
+		for (int i = 0; i < m_length; i++) {
+			m_Array[i] = data.m_Array[i];
+		}
+	}
 };
 
 
@@ -119,7 +130,7 @@ SortedList<T>::~SortedList() {					//소멸자
 }
 
 template<typename T>
-int SortedList<T>::Add(const T& data) {			//아이템 더하기
+int SortedList<T>::Add(T& data) {			//아이템 더하기
 	if (m_length == 0) {						//배열이 비었다면, 0번째 인덱스에 할당
 		m_Array[0] = data;
 		m_length++;
@@ -275,7 +286,7 @@ int SortedList<T>::Delete(T data) {
 }
 
 template<typename T>
-int SortedList<T>::Replace(const T& data) {
+int SortedList<T>::Replace(T& data) {
 	if (m_length == 0) {
 		return 0;
 	}

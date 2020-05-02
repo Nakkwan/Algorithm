@@ -1,10 +1,6 @@
 #ifndef __ITEMTYPE_H
 #define __ITEMTYPE_H
-#include <string>
-#include <iostream>
-#include <fstream>
-#include "SingleLinkedList.h"
-using namespace std;
+#include "pch.h"
 
 
 class ItemType{
@@ -16,14 +12,12 @@ public:
 		O_Type = "";
 		O_Volume = -1;
 		O_SearchNum = -1;
-		O_Total++;
 		O_RoomID = -1;
 		O_DrawerID = -1;
 		O_ContainerID = -1;
+		O_Picture = "None";
 	}
-	~ItemType() {
-		O_Total--;
-	};	//destructor
+	~ItemType() {}	//destructor
 
 	/*
 	@brief: get object name
@@ -90,6 +84,14 @@ public:
 	int GetRoomID() const;
 
 	/*
+	@brief: get picture name(path) of object
+	@pre: set picture name(path)
+	@post: none
+	@return: picture name(path)
+	*/
+	string GetPicture() const;
+
+	/*
 	@brief: set object name
 	@pre: none
 	@post: assign object name
@@ -135,7 +137,13 @@ public:
 	*/
 	void SetVolume(int inVolume);
 
-	
+	/*
+	@brief: set picture name(path) of object
+	@pre: none
+	@post: assign picture name(path) of object
+	@param: picture name(path) of object
+	*/
+	void SetPicture(string inPic);
 
 	/*
 	@brief: set elememt of ItemType member value
@@ -210,6 +218,13 @@ public:
 	void DisplayRoomIDOnScreen();	
 
 	/*
+	@brief: display picture name(path) of ItemType on screen
+	@pre: set picture
+	@post: display picture
+	*/
+	void DisplayPictureOnScreen();
+
+	/*
 	@brief: display member value of ItemType on screen
 	@pre: set name, buydate, label, type, volume
 	@post: display member value of ItemType
@@ -269,6 +284,13 @@ public:
 	void SetRoomIDFromKB();
 
 	/*
+	@brief: Set Picture name(path) of object
+	@pre: none
+	@post: set picture name of object picture from keyboard
+	*/
+	void SetPictureFromKB();
+
+	/*
 	@brief: set member value of ItemType receive input from keyboard
 	@pre: none
 	@post: assign member value from the keyboard
@@ -290,7 +312,7 @@ public:
 	@param: input file object
 	@return: 0 read fail, 1 success
 	*/
-	int ReadDataFromFile(std::ifstream& fin);
+	int ReadDataFromFile(ifstream& fin);
 
 	/*
 	@brief: Write data from file
@@ -299,15 +321,7 @@ public:
 	@param: output file object
 	@return: 0 write fail, 1 success
 	*/
-	int WriteDataToFile(std::ofstream& fout);
-
-	/*
-	@brief: Get number of total number of different object
-	@pre: set Total number of object
-	@post: none
-	@return: get number of object
-	*/
-	int GetTotalObjectNum();
+	int WriteDataToFile(ofstream& fout);
 
 	/*
 	@brief: °Ë»öÈ½¼ö¸¦ ´Ã¸°´Ù.
@@ -324,7 +338,7 @@ public:
 	@post: none
 	@return: return O_searchNum
 	*/
-	int GetSearchNum() {
+	int GetSearchNum() const {
 		return O_SearchNum;
 	}
 
@@ -384,10 +398,15 @@ public:
 	*/
 	void operator=(const ItemType& data) {
 		O_Name = data.GetName();
-		O_BuyDate = data.GetBuyDate();
 		O_Label = data.GetLabel();
+		O_RoomID = data.GetRoomID();
+		O_DrawerID = data.GetDrawerID();
+		O_ContainerID = data.GetContainerID();
 		O_Type = data.GetType();
+		O_BuyDate = data.GetBuyDate();
 		O_Volume = data.GetVolume();
+		O_Picture = data.GetPicture();
+		O_SearchNum = data.GetSearchNum();
 	}
 
 private:
@@ -395,12 +414,12 @@ private:
 	int O_Label;
 	int O_BuyDate;
 	string O_Type;
+	string O_Picture;
 	int O_Volume;
 	int O_SearchNum;
 	int O_RoomID;
 	int O_DrawerID;
 	int O_ContainerID;
-	static int O_Total;
 	static SingleLinkedList<string> O_TypeList;
 };
 

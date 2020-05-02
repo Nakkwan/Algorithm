@@ -1,7 +1,20 @@
+#include "pch.h"
 #include "DrawerType.h"
+
+DrawerType::DrawerType() {
+	d_ID = -1;
+	d_length = 0;
+	d_type = "";
+	d_Name = "";
+	d_curPointer = -1;
+}
 
 int DrawerType::GetDrawerID() const{
 	return d_ID;
+}
+
+int DrawerType::GetRoomID() {
+	return d_ID / 100;
 }
 
 string DrawerType::GetDrawerName() const{
@@ -35,8 +48,29 @@ void DrawerType::SetDrawerRecord(int inID, string inName, string inType) {
 }
 
 void DrawerType::SetDrawerIDfromKB() {
-	cout << "DrawerID: ";
-	cin >> d_ID;
+	int ro, dr;
+	do {
+		cout << "(R: RoomID(1~9), DD: DrawerID(10~99))\n";
+		cout << "DrawerID(RDD): ";
+		cin >> d_ID;
+		if (d_ID > 999 || d_ID < 100) {
+			cout << "Error: DrawerID_out of range\n\n";
+			continue;
+		}
+		ro = d_ID / 100;
+		dr = d_ID % 100;
+		if (dr < 100 && dr > 9) {
+			if (ro < 10 && ro > 1) {
+				break;
+			}
+			else {
+				cout << "Error: Out_of_range\n\n";
+			}
+		}
+		else {
+			cout << "Error: Out_of_range\n\n";
+		}
+	} while (true);
 }
 
 void DrawerType::SetDrawerNamefromKB() {
@@ -49,20 +83,34 @@ void DrawerType::SetDrawerTypefromKB() {
 	cin >> d_type;
 }
 
-void DrawerType::AddContainer(const ContainerType& data) {
+int DrawerType::AddContainer(const ContainerType& data) {
 	if (d_Array.Add(data)) {
 		d_length++;
+		return 1;
 	}
+	return 0;
 }
 
-void DrawerType::DeleteContainer(ContainerType& data) {
+int DrawerType::DeleteContainer(ContainerType& data) {
 	if (d_Array.Delete(data)) {
 		d_length--;
+		return 1;
 	}
+	return 0;
 }
 
-void DrawerType::UpdateContainer(ContainerType& data) {
-	d_Array.Replace(data);
+int DrawerType::UpdateContainer(ContainerType& data) {
+	if (d_Array.Replace(data)) {
+		return 1;
+	}
+	return 0;
+}
+
+int DrawerType::GetContainer(ContainerType& data) {
+	if (d_Array.Get(data)) {
+		return 1;
+	}
+	return 0;
 }
 
 void DrawerType::DisplayAllContainer() {
@@ -71,14 +119,13 @@ void DrawerType::DisplayAllContainer() {
 	while (d_curPointer != -1) {
 		cout << d_curPointer + 1 << ".\n";
 		temp.DisplayContainer();
+		cout << "\t######   Object   ######\n\n";
 		temp.DisplayAllItem();
-		temp.DisplayAllPhoto();
 	}
 }
 
 void DrawerType::DisplayInfo() {
-	cout << "\t\t<Drawer Information>>\n";
-	cout << "DrawerID: " << GetDrawerID() << endl;
+	cout << "DrawerID(RDD): " << GetDrawerID() << endl;
 	cout << "DrawerName: " << GetDrawerName() << endl;
 	cout << "DrawerType: " << GetDrawerType() << endl;
 }

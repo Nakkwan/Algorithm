@@ -161,8 +161,9 @@ bool Queue<T>::IsEmpty() {
 template<typename T>
 int Queue<T>::Enqueue(T data) {					//추가
 	if (IsFull()) {
-		cout << "Error: Queue is already full\n";
-		return 0;
+		Q_head = (Q_head + 1) % (Q_size + 1);	//head를 다음칸으로 넘기고
+		Q_item[Q_head] = data;					//할당
+		Q_tail = (Q_tail + 1) % (Q_size + 1);
 	}
 	else {										//queue가 꽉차지 않았다면
 		Q_head = (Q_head + 1) % (Q_size + 1);	//head를 다음칸으로 넘기고
@@ -199,7 +200,7 @@ void Queue<T>::ResetQueue() {
 template<typename T>
 int Queue<T>::GetNextItem(T& data) {
 	if (Q_curPointer == Q_head) {					//head랑 같아졌다면
-		Q_curPointer = Q_tail;							//-1 반환(-1은 배열엔 없는 수이기 때문)
+		Q_curPointer = -1;							//-1 반환(-1은 배열엔 없는 수이기 때문)
 		return Q_curPointer;
 	}
 	else {

@@ -99,6 +99,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -145,7 +147,12 @@
     <ClCompile Include="DrawerType.cpp" />
     <ClCompile Include="ItemType.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MasterType.cpp" />
+    <ClCompile Include="pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="RecentList.cpp" />
+    <ClCompile Include="RoomList.cpp" />
     <ClCompile Include="RoomType.cpp" />
     <ClCompile Include="SimpleItemType.cpp" />
     <ClCompile Include="TempList.cpp" />
@@ -160,8 +167,12 @@
     <ClInclude Include="DrawerType.h" />
     <ClInclude Include="ItemType.h" />
     <ClInclude Include="LinkedQueue.h" />
+    <ClInclude Include="LinkedQueueIterator.h" />
+    <ClInclude Include="MasterType.h" />
+    <ClInclude Include="pch.h" />
     <ClInclude Include="Queue.h" />
     <ClInclude Include="RecentList.h" />
+    <ClInclude Include="RoomList.h" />
     <ClInclude Include="RoomType.h" />
     <ClInclude Include="SimpleItemType.h" />
     <ClInclude Include="SingleLinkedList.h" />

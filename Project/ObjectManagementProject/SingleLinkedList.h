@@ -97,7 +97,6 @@ public:
         if (data.GetLength())
         {
             // obj curPtr 초기화
-            data.ResetList();
 
             T item;
             //노드 복사

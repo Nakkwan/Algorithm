@@ -39,7 +39,7 @@ public:
 	@pre: 넣을 element 설정
 	@post: 스택에 element 추가되고, 크기 +1
 	*/
-	int Push(T data);
+	int Push(const T& data);
 
 	/*
 	@breif: 스택에서 element 빼기
@@ -74,6 +74,8 @@ public:
 	*/
 	int Get(T& data);
 
+	int GetTop(T& data);
+
 	/*
 	@breif: stack의 데이터 교체
 	@pre: 교체할 데이터 설정
@@ -99,6 +101,10 @@ public:
 	@return: stack의 size return
 	*/
 	int getSize();
+
+	int ReplacebyIndex(T& data, int index);
+
+	int GetbyIndex(T& data, int index);
 };
 
 
@@ -149,7 +155,7 @@ bool Stack<T>::IsEmpty() {
 }
 
 template<typename T>
-int Stack<T>::Push(T data) {
+int Stack<T>::Push(const T& data) {
 	if (IsFull()) {						//배열이 꽉 차면 에러
 		cout << "Error: Stack is already full\n";
 		return 0;
@@ -210,6 +216,18 @@ int Stack<T>::Get(T& data) {
 }
 
 template<typename T>
+int Stack<T>::GetTop(T& data) {
+	if (IsEmpty()) {						//배열이 비었으면 에러
+		cout << "Error: Stack is already empty\n";
+		return 0;
+	}
+	else {
+		data = S_stack[S_top];
+	}
+	return 1;
+}
+
+template<typename T>
 int Stack<T>::Replace(T data) {
 	T temp;
 	ResetStack();
@@ -248,7 +266,25 @@ int Stack<T>::Delete(T data) {
 
 template<typename T>
 int Stack<T>::getSize() {
-	return S_top;
+	return S_top + 1;
+}
+
+template<typename T>
+int Stack<T>::ReplacebyIndex(T& data, int index) {
+	if (index > S_top || index < 0) {
+		return 0;
+	}
+	S_stack[index] = data;
+	return 1;
+}
+
+template<typename T>
+int Stack<T>::GetbyIndex(T& data, int index) {
+	if (index > S_top || index < 0) {
+		return 0;
+	}
+	data = S_stack[index];
+	return 1;
 }
 
 #endif

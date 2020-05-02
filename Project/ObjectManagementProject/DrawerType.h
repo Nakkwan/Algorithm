@@ -1,15 +1,9 @@
 #ifndef __DRAWERTYPE_H
 #define __DRAWERTYPE_H
 
+#include "pch.h"
 
-#include "Base.h"
-#include "Stack.h"
-#include "ContainerType.h"
-#include "SingleLinkedList.h"
-#include <string>
-using namespace std;
-
-class DrawerType : public Base{
+class DrawerType {
 private:
 	int d_ID;
 	string d_Name;
@@ -18,6 +12,8 @@ private:
 	int d_curPointer;
 	SingleLinkedList<ContainerType> d_Array;
 public:
+	DrawerType();
+	~DrawerType(){}
 	/*
 	@brief: Drawer의 고유 ID 값 받기
 	@pre: DrawerID가 설정되어 있어야함
@@ -25,6 +21,8 @@ public:
 	@return: DrawerID return
 	*/
 	int GetDrawerID() const;
+
+	int GetRoomID();
 
 	/*
 	@brief: Drawer의 고유 ID 값 받기
@@ -109,7 +107,7 @@ public:
 	@post: Drawer의 ContainerList에 Container가 추가됨.
 	@param: ContainerType for add
 	*/
-	void AddContainer(const ContainerType& data);
+	int AddContainer(const ContainerType& data);
 
 	/*
 	@brief: Drawer에서 Container를 뺌
@@ -117,7 +115,7 @@ public:
 	@post: Drawer의 ContainerList에서 해당하는 Container가 삭제됨.
 	@param: ContainerType for delete
 	*/
-	void DeleteContainer(ContainerType& data);
+	int DeleteContainer(ContainerType& data);
 
 	/*
 	@brief: Drawer의 Container 정보를 갱신함
@@ -125,7 +123,9 @@ public:
 	@post: Drawer의 ContainerList에서 해당하는 Container의 정보가 갱신됨.
 	@param: ContainerType for update
 	*/
-	void UpdateContainer(ContainerType& data);
+	int UpdateContainer(ContainerType& data);
+
+	int GetContainer(ContainerType& data);
 
 	/*
 	@brief: ContainerList에 있는 Container가 모두 display됨
@@ -146,6 +146,42 @@ public:
 	int GetNextContainer(ContainerType& data);
 
 	void MakeEmpty();
+
+	bool operator>(const DrawerType& data) {
+		if (d_ID > data.d_ID) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	bool operator<(const DrawerType& data) {
+		if (d_ID < data.d_ID) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	bool operator==(const DrawerType& data) {
+		if (d_ID == data.d_ID) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	void operator=(DrawerType& data) {
+		d_ID = data.d_ID;
+		d_Name = data.d_Name;
+		d_type = data.d_type;
+		d_length = data.d_length;
+		d_curPointer = data.d_curPointer;
+		d_Array = data.d_Array;
+	}
 };
 
 #endif // !__DRAWERTYPE_H

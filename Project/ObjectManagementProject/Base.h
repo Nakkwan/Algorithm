@@ -1,4 +1,5 @@
 #pragma once
+#include "pch.h"
 
 class ItemType;
 class SimpleItemType;
@@ -6,9 +7,9 @@ class RoomType;
 class TempList;
 class RecentList;
 class BestList;
+class MasterType;
+class RoomList;
 
-template<typename T>
-class LinkedQueue;
 
 template<typename T>
 class Queue;
@@ -22,11 +23,17 @@ class Stack;
 template<typename T>
 class UnsortedList;
 
+template<typename T>
+class DoublySortedLinkedList;
+
+template<typename T>
+class LinkedQueue;
+
 class Base {
 public:
-	static SortedList<ItemType> MasterList;
-	static UnsortedList<RoomType> RoomList;
-	static TempList T_List;
-	static RecentList R_List;
-	static BestList B_List;
+	static MasterType Master_List;
+	static RoomList Room_List;
+	static TempList Temp_List;
+	static RecentList Recent_List;
+	static BestList Best_List;
 };

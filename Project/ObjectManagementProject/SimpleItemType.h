@@ -1,8 +1,6 @@
 #ifndef __SIMPLEITEMTYPE_H
 #define __SIMPLEITEMTYPE_H
-#include <string>
-#include <iostream>
-using namespace std;
+#include "pch.h"
 
 class SimpleItemType{
 private:
@@ -21,6 +19,13 @@ public:
 	@return: unique label
 	*/
 	int getLabel() const;
+
+	int GetRoomID();
+
+	int GetDrawerID();
+
+	int GetContainerID();
+
 
 	/*
 	@brief: 물건의 이름를 받음
@@ -70,7 +75,7 @@ public:
 	*/
 	void setRecord(int inlabel, string inname, string inusage);
 
-	void SetRecordByType(const SimpleItemType& data);
+	void SetRecordByItemType(const ItemType& data);
 
 	/*
 	@brief: member value를 display

@@ -109,7 +109,7 @@ public:
 		m_CurPointer = data.m_CurPointer;
 		Array_size = data.Array_size;
 		m_Array = new T[Array_size];
-		for (int i = 0; i < m_length; ++i) {
+		for (int i = 0; i < m_length; i++) {
 			m_Array[i] = data.m_Array[i];
 		}
 	}

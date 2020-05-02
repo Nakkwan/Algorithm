@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "SimpleItemType.h"
 
 SimpleItemType::SimpleItemType() {
@@ -14,6 +15,18 @@ SimpleItemType::SimpleItemType(int inlabel) {
 
 int SimpleItemType::getLabel() const {
 	return S_label;
+}
+
+int SimpleItemType::GetRoomID() {
+	return S_label / 1000000;
+}
+
+int SimpleItemType::GetDrawerID() {
+	return (S_label / 10000) % 100;
+}
+
+int SimpleItemType::GetContainerID() {
+	return (S_label / 100) % 100;
 }
 
 string SimpleItemType::getName() const {
@@ -42,10 +55,10 @@ void SimpleItemType::setRecord(int inlabel, string inname, string intype) {
 	S_type = intype;
 }
 
-void SimpleItemType::SetRecordByType(const SimpleItemType& data) {
-	S_label = data.getLabel();
-	S_name = data.getName();
-	S_type = data.getType();
+void SimpleItemType::SetRecordByItemType(const ItemType& data) {
+	S_label = data.GetLabel();
+	S_name = data.GetName();
+	S_type = data.GetType();
 }
 
 void SimpleItemType::DisplayItem() {

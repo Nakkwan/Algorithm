@@ -7,7 +7,7 @@ struct DoublyNodeType;
 template<typename T>
 class DoublySortedLinkedList;
 
-/**
+/*
 *	연결리스트에서 쓰이는 Iterator의 클래스.
 */
 template <typename T>

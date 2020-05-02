@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "RoomType.h"
 
 int RoomType::GetRoomID() const {
@@ -40,29 +41,47 @@ void RoomType::SetRoomNamefromKB() {
 	cin >> r_Name;
 }
 
-void RoomType::AddDrawer(const DrawerType& data) {
+int RoomType::AddDrawer(DrawerType& data) {
 	if (r_Array.Add(data)) {
 		r_Length++;
+		return 1;
 	}
+	return 0;
 }
 
-void RoomType::DeleteDrawer(DrawerType& data) {
+int RoomType::DeleteDrawer(DrawerType& data) {
 	if (r_Array.Delete(data)) {
 		r_Length--;
+		return 1;
 	}
+	return 0;
 }
 
-void RoomType::UpdateDrawer(DrawerType& data) {
-	r_Array.Replace(data);
+int RoomType::UpdateDrawer(DrawerType& data) {
+	if (r_Array.Replace(data)) {
+		return 1;
+	}
+	return 0;
 }
 
-void RoomType::DiplayAllDrawer() {
+int RoomType::GetDrawer(DrawerType& data) {
+	if (r_Array.Get(data)) {
+		return 1;
+	}
+	return 0;
+}
+
+void RoomType::DisplayAllDrawer() {
 	DrawerType temp;
 	r_curPointer = r_Array.GetNextItem(temp);
 	while (r_curPointer != -1) {
 		cout << r_curPointer + 1 << ".\n";
+		cout << "\t######   Drawer   ######\n\n";
 		temp.DisplayInfo();
+		cout << "\t###### Container  ######\n\n";
 		temp.DisplayAllContainer();
+		cout << setfill('#') << setw(30) << "\n";
+
 	}
 
 }
@@ -70,4 +89,19 @@ void RoomType::DiplayAllDrawer() {
 void RoomType::DisplayInfo() {
 	cout << "RoomID: " << GetRoomID() << endl;
 	cout << "RoomName: " << GetRoomName() << endl;
+}
+
+void RoomType::ResetList() {
+	r_curPointer = -1;
+}
+
+void RoomType::MakeEmpty() {
+	ResetList();
+	r_Length = 0;
+	r_Array.MakeEmpty();
+}
+
+int RoomType::GetNextDrawer(DrawerType& data) {
+	r_curPointer = r_Array.GetNextItem(data);
+	return r_curPointer;
 }

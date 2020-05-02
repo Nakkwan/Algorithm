@@ -1,17 +1,17 @@
 #ifndef __BESTLIST_H
 #define __BESTLIST_H
 
-#include "Stack.h"
-#include "ItemType.h"
-#include "Base.h"
+#include "pch.h"
 
 
-class BestList : public Base{
+class BestList : public Base {
 private:
-	Stack<ItemType> b_Array;
-	int b_length;
-	int b_curPointer;
+	Stack<ItemType> B_Array;
+	int B_length;
 public:
+	BestList();
+	~BestList(){}
+
 	/*
 	@brief: stack의 top data와 검색횟수 비교
 	@pre: set stack
@@ -19,7 +19,7 @@ public:
 	@param: ItemType for compare
 	@return: top data가 더 많으면 1, 같으면 0, 적으면 -1을 return
 	*/
-	int CompareSearchNum(const ItemType& data);
+	bool CompareSearchNum(const ItemType& data);
 
 	/*
 	@brief: Stack에 물건 추가
@@ -27,14 +27,14 @@ public:
 	@post: stack이 꽉 차지않았다면 물건을 추가하고, 
 		   꽉 찼다면 top data와 비교하여 더 크면 top data삭제 후 추가
 	*/
-	void AddItem();
+	int AddItem(ItemType& data);
 
 	/*
 	@brief: 검색 횟수에 따라 stack내부 위치 재정렬
 	@pre: stack has more than 1 element
 	@post: Readjust stack
 	*/
-	void RearrangeList();
+	void RearrangeStack();
 
 	/*
 	@brief: stack에 있는 모든 물건 정보 출력
@@ -48,7 +48,7 @@ public:
 	@pre: none
 	@post: Stack를 빈 상태로 만들고, 물건들의 검색 횟수를 0으로 초기화
 	*/
-	void MakeEmpty();
+	//void MakeEmpty();
 
 	/*
 	@brief: 물건의 검색 횟수를 0으로 초기화
@@ -56,7 +56,7 @@ public:
 	@post: 해당 index의 물건의 검색 횟수를 0으로 초기화
 	@param: index of stack for reset SearchNum
 	*/
-	void ResetObjectSearch(int index);
+	/*void ResetObjectSearch(int index);*/
 };
 
 

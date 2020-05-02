@@ -1,6 +1,7 @@
+#include "pch.h"
 #include "ItemType.h"
 
-int ItemType::O_Total = 0;
+SingleLinkedList<string> ItemType::O_TypeList;
 
 string ItemType::GetName() const {
 	return O_Name;
@@ -17,9 +18,6 @@ string ItemType::GetType() const {
 int ItemType::GetVolume() const {
 	return O_Volume;
 }
-int ItemType::GetContainerID() const {
-	return O_ContainerID;
-}
 int ItemType::GetRoomID() const {
 	return O_RoomID;
 }
@@ -28,6 +26,9 @@ int ItemType::GetDrawerID() const {
 }
 int ItemType::GetContainerID() const {
 	return O_ContainerID;
+}
+string ItemType::GetPicture() const {
+	return O_Picture;
 }
 void ItemType::SetName(string inName) {
 	O_Name = inName;
@@ -43,6 +44,9 @@ void ItemType::SetLabel(int inLabel) {
 }
 void ItemType::SetVolume(int inVolume) {
 	O_Volume = inVolume;
+}
+void ItemType::SetPicture(string inPic) {
+	O_Picture = inPic;
 }
 
 void ItemType::SetContainerID() {
@@ -101,7 +105,9 @@ void ItemType::DisplayDrawerIDOnScreen() {
 void ItemType::DisplayRoomIDOnScreen() {
 	cout << "RoomID: " << GetRoomID() << endl;
 }
-
+void ItemType::DisplayPictureOnScreen() {
+	cout << "Object Picture: " << GetPicture() << endl;
+}
 void ItemType::DisplayRecordOnScreen() {
 	cout << "Object name: " << GetName() << endl;
 	cout << "RoomID: " << GetRoomID() << endl;
@@ -111,6 +117,7 @@ void ItemType::DisplayRecordOnScreen() {
 	cout << "Type: " << GetType() << endl;
 	cout << "Date obtained: " << GetBuyDate() << endl;
 	cout << "Volume: " << GetVolume() << endl;
+	cout << "Object Picture: " << GetPicture() << endl;
 }
 
 void ItemType::SetNameFromKB() {
@@ -235,12 +242,12 @@ void ItemType::SetLabelFromKB() {
 
 void ItemType::SetTempLabelFromKB() {
 	 do {
-		cout << "Label(10~99): ";
+		cout << "Label(10~999): ";
 		cin >> O_Label;
-		if (O_Label > 99 || O_Label < 10) {
+		if (O_Label > 999 || O_Label < 10) {
 			cout << "Error: Label_out of range\n\n";
 		}
-	 } while (O_Label > 99 || O_Label < 10);
+	 } while (O_Label > 999 || O_Label < 10);
 }
 
 void ItemType::SetVolumeFromKB() {
@@ -317,24 +324,30 @@ void ItemType::SetRoomIDFromKB() {
 		}
 	} while (true);
 }
+void ItemType::SetPictureFromKB() {
+	cout << "Location of Object Picture: ";
+	cin >> O_Picture;
+}
 
 void ItemType::SetRecordFromKB() {
 	SetNameFromKB();
-	SetRoomID();
+	SetRoomIDFromKB();
 	SetDrawerIDFromKB();
 	SetContainerIDFromKB();
 	SetLabelFromKB();
 	SetTypeFromKB();
 	SetDateFromKB();
 	SetVolumeFromKB();
+	SetPictureFromKB();
 }
 
 void ItemType::SetTempfromKB() {
 	SetNameFromKB();
-	SetTypeFromKB();
 	SetTempLabelFromKB();
+	SetTypeFromKB();
 	SetDateFromKB();
 	SetVolumeFromKB();
+	SetPictureFromKB();
 }
 
 int ItemType::ReadDataFromFile(ifstream& fin) {
@@ -347,6 +360,7 @@ int ItemType::ReadDataFromFile(ifstream& fin) {
 		fin >> O_Type;
 		fin >> O_BuyDate;
 		fin >> O_Volume;
+		fin >> O_Picture;
 		return 1;
 	}
 	else {
@@ -363,14 +377,11 @@ int ItemType::WriteDataToFile(ofstream& fout) {
 		fout << O_Label << ' ';
 		fout << O_Type << ' ';
 		fout << O_BuyDate << ' ';
-		fout << O_Volume << '\n';
+		fout << O_Volume << ' ';
+		fout << O_Picture << '\n';
 		return 1;
 	}
 	else {
 		return 0;
 	}
-}
-
-int ItemType::GetTotalObjectNum() {
-	return O_Total;
 }

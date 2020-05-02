@@ -1,40 +1,38 @@
 #ifndef __TEMPTYPE_H
 #define __TEMPTYPE_H
 
-#include "ItemType.h"
-#include "LinkedQueue.h"
-#include "Base.h"
+#include "pch.h"
 
-class TempType : public Base{
+class TempList : public Base {
 private:
 	int numOfItems;
 	LinkedQueue<ItemType> tItemList;
 public:
-	TempType() {				//constructor
+	TempList() {				//constructor
 		numOfItems = 0;
 	}
-	~TempType() {}				//destructor
+	~TempList() {}				//destructor
 
 	/*
 	@breif: tItemList에 데이터 추가
-	@pre: ContainerID를 뺀 ItemType 설정
+	@pre: 저장 장소를 뺀 ItemType 설정
 	@post: tItemList에 head에 데이터 추가
 	*/
-	void Enqueue(const ItemType& data);				//queue에 데이터 추가4
+	int Enqueue(const ItemType& data);				//queue에 데이터 추가4
 
 	/*
 	@breif: tItemList에서 먼저 들어간 데이터 삭제
 	@pre: ItemType에 삭제
 	@post: tItemList에서 제일 먼저 들어간 데이터가 삭제되고 reference로 반환
 	*/
-	void Dequeue(ItemType& data);					//queue에 데이터 삭제하고 반환
+	int Dequeue(ItemType& data);					//queue에 데이터 삭제하고 반환
 
 	/*
 	@breif: tItemList에 들어있는 element 값 바꾸기
 	@pre: 바꿀 data값 설정
 	@post: tItemList의 element가 바뀜
 	*/
-	void Replace(const ItemType& data);					//queue의 데이터 교체
+	int Replace(const ItemType& data);					//queue의 데이터 교체
 
 	/*
 	@breif: tItemList의 크기
@@ -78,7 +76,7 @@ public:
 	@pre: 찾을 데이터 설정
 	@post: 해당하는 데이터가 reference로 반환됨
 	*/
-	void Get(ItemType& data);
+	int Get(ItemType& data);
 
 	/*
 	@breif: tItemList에서 element 삭제
@@ -87,6 +85,8 @@ public:
 	@param: 삭제할 데이터의 primary ID가 있는 변수
 	*/
 	int Delete(ItemType& data);
+
+	/*int AllocateItem(ItemType& data);*/
 
 };
 
