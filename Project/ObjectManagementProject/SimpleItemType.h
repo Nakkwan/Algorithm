@@ -20,10 +20,28 @@ public:
 	*/
 	int getLabel() const;
 
+	/*
+	@brief: get ID of Room
+	@pre: set roomID
+	@post: none
+	@return: roomID
+	*/
 	int GetRoomID();
 
+	/*
+	@brief: get ID of Drawer
+	@pre: set drawerID
+	@post: none
+	@return: drawerID
+	*/
 	int GetDrawerID();
 
+	/*
+	@brief: get ID of Container
+	@pre: set containerID
+	@post: none
+	@return: containerID
+	*/
 	int GetContainerID();
 
 
@@ -75,6 +93,11 @@ public:
 	*/
 	void setRecord(int inlabel, string inname, string inusage);
 
+	/*
+	@brief: ItemType으로 SimpleItemType의 정보를 설정함
+	@pre: Set ItemType
+	@post: Set value of SimpleItemType by ItemType (ID, Name, Type)
+	*/
 	void SetRecordByItemType(const ItemType& data);
 
 	/*

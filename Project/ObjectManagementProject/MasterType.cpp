@@ -11,8 +11,8 @@ int MasterType::AddObject(ItemType& data) {
 		return 0;
 	}
 	if(M_List.Add(data)) {
-		return 1;
 		M_length++;
+		return 1;
 		
 	}
 	cout << "Error: Storage is already full\n";
@@ -45,23 +45,12 @@ int MasterType::UpdateObject(const ItemType& data) {
 	return 0;
 }
 
-int MasterType::ReplaceObject(const ItemType& data) {
-	if (M_List.IsEmpty()) {
-		cout << "Error: No such Object found\n";
-		return 0;
-	}
-	if (M_List.Replace(data)) {
-		return 1;
-	}
-	cout << "Error: Update Fail\n";
-	return 0;
-}
-
 int MasterType::GetObject(ItemType& data) {
 	if (M_List.Get(data)) {
 		data.DisplayRecordOnScreen();		//출력
 		data.AddSearchNum();
-		ReplaceObject(data);
+		UpdateObject(data);
+		Best_List.AddItem(data);
 		return 1;
 	}
 	return 0;
@@ -71,15 +60,17 @@ int MasterType::GetObjectByName(ItemType& data) {
 	int count = 1;
 	ItemType temp;
 	DoublyIterator<ItemType> itor(M_List);
+	temp = itor.Next();
 	while (itor.NextNotNull()) {				//리스트가 끝날 때까지
-		temp = itor.Next();
-		if (temp.GetName().find(data.GetType())) {				//용도가 같다면
+		if ((temp.GetName()).find(data.GetName()) != string::npos) {				//이름이 같다면
 			cout << count << ".\n";
 			temp.DisplayRecordOnScreen();		//출력
 			temp.AddSearchNum();
-			ReplaceObject(temp);
+			Recent_List.AddItem(temp);
+			UpdateObject(temp);
 			count++;
 		}
+		temp = itor.Next();
 	}
 	if (count == 1) {
 		return 0;
@@ -97,7 +88,9 @@ int MasterType::GetObjectByUsage(ItemType& data) {
 			cout << count << ".\n";
 			temp.DisplayRecordOnScreen();		//출력
 			temp.AddSearchNum();
-			ReplaceObject(temp);
+			UpdateObject(temp);
+			Recent_List.AddItem(temp);
+			Best_List.AddItem(temp);
 			count++;
 		}
 	}
@@ -117,7 +110,9 @@ int MasterType::GetObjectByBuydate(int start, int finish) {
 			cout << count << ".\n";
 			data.DisplayRecordOnScreen();							//출력
 			data.AddSearchNum();
-			ReplaceObject(data);
+			Recent_List.AddItem(data);
+			Best_List.AddItem(data);
+			UpdateObject(data);
 			count++;
 			cout << "\n";
 		}
@@ -173,7 +168,14 @@ int MasterType::ReadDataFromFile() {
 	if (OpenInFile(filename)) {
 		while (!a_inFile.eof()) {				//파일이 끝나기 전까지 데이터 읽기
 			data.ReadDataFromFile(a_inFile);
-			AddObject(data);
+			SimpleItemType simdata;
+			simdata.SetRecordByItemType(data);
+			if(Room_List.ObjectAdd(simdata)) {
+				AddObject(data);
+			}
+			else {
+				return 0;
+			}
 
 		}
 	}

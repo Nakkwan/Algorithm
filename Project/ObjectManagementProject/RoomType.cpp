@@ -32,8 +32,10 @@ void RoomType::SetRoomIDfromKB() {
 		cin >> r_ID;
 		if (r_ID > 9 || r_ID < 1) {
 			cout << "Error: Out_of_range\n";
+			continue;
 		}
-	} while (r_ID < 10 && r_ID > 0);
+		break;
+	} while (1);
 }
 
 void RoomType::SetRoomNamefromKB() {
@@ -50,6 +52,7 @@ int RoomType::AddDrawer(DrawerType& data) {
 }
 
 int RoomType::DeleteDrawer(DrawerType& data) {
+	
 	if (r_Array.Delete(data)) {
 		r_Length--;
 		return 1;
@@ -73,15 +76,16 @@ int RoomType::GetDrawer(DrawerType& data) {
 
 void RoomType::DisplayAllDrawer() {
 	DrawerType temp;
+	r_Array.ResetList();
 	r_curPointer = r_Array.GetNextItem(temp);
-	while (r_curPointer != -1) {
-		cout << r_curPointer + 1 << ".\n";
+	while (r_curPointer != -1) {								//Room에 속한 Drawer, container Object를 모두 display
 		cout << "\t######   Drawer   ######\n\n";
+		cout << r_curPointer + 1 << ".\n";
 		temp.DisplayInfo();
 		cout << "\t###### Container  ######\n\n";
 		temp.DisplayAllContainer();
 		cout << setfill('#') << setw(30) << "\n";
-
+		r_curPointer = r_Array.GetNextItem(temp);
 	}
 
 }

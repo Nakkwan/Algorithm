@@ -43,7 +43,7 @@ public:
 	@post: queue에 데이터가 추가되고 크기가 1 늘어남. head가 다음 칸으로 이동
 	@return: 추가가 되면 1, 안되면 0 return
 	*/
-	int Enqueue(T data);
+	int Enqueue(T& data);
 
 	/*
 	@brief: queue에 먼저 들어온 데이터 삭제
@@ -159,7 +159,7 @@ bool Queue<T>::IsEmpty() {
 }
 
 template<typename T>
-int Queue<T>::Enqueue(T data) {					//추가
+int Queue<T>::Enqueue(T& data) {					//추가
 	if (IsFull()) {
 		Q_head = (Q_head + 1) % (Q_size + 1);	//head를 다음칸으로 넘기고
 		Q_item[Q_head] = data;					//할당
@@ -215,7 +215,7 @@ int Queue<T>::Get(T& data) {
 	T temp;
 	ResetQueue();
 	GetNextItem(temp);
-	while (Q_curPointer != Q_tail) {
+	while (Q_curPointer != -1) {
 		if (temp == data) {
 			data = temp;
 			return 1;
@@ -224,6 +224,7 @@ int Queue<T>::Get(T& data) {
 			GetNextItem(temp);
 		}
 	}
+
 	return 0;
 }
 
@@ -236,7 +237,7 @@ int Queue<T>::Delete(const T& data) {
 		return 0;
 	}
 	else {
-		while (Q_curPointer != Q_tail) {
+		while (Q_curPointer != -1) {
 			if (temp == data) {				//지울 item을 찾았다면
 				int i = Q_curPointer;
 				int j;

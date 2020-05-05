@@ -5,15 +5,16 @@
 
 class DrawerType {
 private:
-	int d_ID;
-	string d_Name;
-	string d_type;
-	int d_length;
-	int d_curPointer;
-	SingleLinkedList<ContainerType> d_Array;
+	int d_ID;									//DrawerID
+	string d_Name;								//DrawerName
+	string d_type;								//DrawerType
+	int d_length;								//Length of ContainerList
+	int d_curPointer;							//Pointer of ContainerList
+	SingleLinkedList<ContainerType> d_Array;	//ContainerList
 public:
-	DrawerType();
-	~DrawerType(){}
+	DrawerType();					//생성자
+	~DrawerType(){}					// default 소멸자
+
 	/*
 	@brief: Drawer의 고유 ID 값 받기
 	@pre: DrawerID가 설정되어 있어야함
@@ -22,6 +23,12 @@ public:
 	*/
 	int GetDrawerID() const;
 
+	/*
+	@brief: Room의 고유 ID 값 받기
+	@pre: RoomID가 설정되어 있어야함
+	@post: none
+	@return: RoomID return
+	*/
 	int GetRoomID();
 
 	/*
@@ -125,6 +132,12 @@ public:
 	*/
 	int UpdateContainer(ContainerType& data);
 
+	/*
+	@brief: Container의 고유 ID 값 받기
+	@pre: ContainerID가 설정되어 있어야함
+	@post: none
+	@return: ContainerID return
+	*/
 	int GetContainer(ContainerType& data);
 
 	/*
@@ -135,16 +148,32 @@ public:
 	void DisplayAllContainer();
 
 	/*
-	@brief: Drawer의 정보를 모두 display
+	@brief: Drawer의 정보를 display
 	@pre: none
-	@post: none
+	@post: 하위 ContainerType에 대한 정보를 제외한 Drawer의 정보 display 
 	*/
 	void DisplayInfo();
 
+	/*
+	@brief: ContainerList 상태 초기화
+	@pre: none
+	@post: set ContainerList initially
+	*/
 	void ResetList();
 
+	/*
+	@brief: 다음 Container의 정보를 받는다.
+	@pre: set List
+	@post: Get Next ContainerType and Increase Pointer
+	@return: return Pointer of ContainerList
+	*/
 	int GetNextContainer(ContainerType& data);
 
+	/*
+	@brief: ContainerList 비우기
+	@pre: none
+	@post: Make ContainerList Empty
+	*/
 	void MakeEmpty();
 
 	bool operator>(const DrawerType& data) {

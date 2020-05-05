@@ -14,22 +14,22 @@ template <typename T>
 class LinkedQueue {
 	friend class LinkedQueueIterator<T>;
 private:
-	int Q_size;
-	QueueNode<T>* Q_front;
-	QueueNode<T>* Q_rear;
+	int Q_size;									//현재 Queue의  사이즈
+	QueueNode<T>* Q_front;						//제일 먼저 추가된 데이터 부분
+	QueueNode<T>* Q_rear;						//제일 나중에 추가된 데이터 부분
 
 public:
-	LinkedQueue() {
+	LinkedQueue() {						//생성자
 		Q_front = new QueueNode<T>;
 		Q_rear = new QueueNode<T>;
 
-		Q_rear->next = Q_front;
+		Q_rear->next = Q_front;				//앞과 꼬리 node를 설정해 놓고, 서로를 가르키게 함
 		Q_rear->prev = nullptr;
 		Q_front->prev = Q_rear;
 		Q_front->next = nullptr;
 		Q_size = 0;
 	}
-	~LinkedQueue() {
+	~LinkedQueue() {					//소멸자
 		MakeEmpty();
 		delete Q_front;
 		delete Q_rear;

@@ -38,6 +38,12 @@ public:
     */
     void MakeEmpty();
 
+    /*
+    @bried: 리스트가 비었는지 확인
+    @pre: none
+    @post: none
+    @return: 리스트가 비었으면 1, 아니면 0을 return 함
+    */
     bool IsEmpty();
 
     /*
@@ -93,6 +99,7 @@ public:
         // 기존 노드 초기화
         MakeEmpty();
 
+        data.ResetList();
         // obj 리스트가 존재할 경우
         if (data.GetLength())
         {
@@ -100,7 +107,7 @@ public:
 
             T item;
             //노드 복사
-            while (data.GetNextItem(item) != 0)
+            while (data.GetNextItem(item) != -1)
                 Add(item);
         }
     }
@@ -299,8 +306,11 @@ void SingleLinkedList<T>::ResetList() {
 template<typename T>
 int SingleLinkedList<T>::GetNextItem(T& data) {
     // current pointer 이 nullptr이라면 처음 node를 가리킴.
-    if (curIndex >= size - 1) {
-        data = curPointer->value;
+    if (IsEmpty()) {
+        return -1;
+    }
+
+    if (curIndex == size - 1) {
         return -1;
     }
 
@@ -309,12 +319,13 @@ int SingleLinkedList<T>::GetNextItem(T& data) {
         curPointer = head;
         data = curPointer->value;
         curIndex = 0;
-        return curIndex;
+        return 0;
     }
-    else
+    else {
         //current position 을 다음 노드로 이동
         curPointer = curPointer->next;
-    curIndex++;
+        curIndex = curIndex + 1;
+    }
     //item 에 current position 의 info 를 삽입
     data = curPointer->value;
     return curIndex;

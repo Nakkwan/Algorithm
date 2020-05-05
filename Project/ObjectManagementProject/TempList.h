@@ -5,8 +5,8 @@
 
 class TempList : public Base {
 private:
-	int numOfItems;
-	LinkedQueue<ItemType> tItemList;
+	int numOfItems;						//Length of TempObjectList
+	LinkedQueue<ItemType> tItemList;	//TempObjectList
 public:
 	TempList() {				//constructor
 		numOfItems = 0;
@@ -85,9 +85,6 @@ public:
 	@param: 삭제할 데이터의 primary ID가 있는 변수
 	*/
 	int Delete(ItemType& data);
-
-	/*int AllocateItem(ItemType& data);*/
-
 };
 
 

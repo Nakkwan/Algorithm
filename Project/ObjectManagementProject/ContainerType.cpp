@@ -14,7 +14,7 @@ int ContainerType::GetContainerID() const {
 }
 
 int ContainerType::GetDrawerID() {
-	return (C_ID % 10000) / 100;
+	return C_ID / 100;
 }
 
 int ContainerType::GetRoomID() {
@@ -60,8 +60,8 @@ void ContainerType::SetContainerRecord(int inID, string inName, string inType, s
 	SetContainerPhoto(inPhoto);
 }
 
-void ContainerType::SetContainerIDfromKB() {
-	int ro, dr, con;
+void ContainerType::SetContainerIDfromKB() {								//ContainerID 설정
+	int ro, dr, con;										
 	do {
 		cout << "(R: RoomID(1~9), DD: DrawerID(10~99), CC: ContainerID(10~99))\n";
 		cout << "ContainerID(RDDCC): ";
@@ -140,7 +140,7 @@ int ContainerType::GetItem(SimpleItemType& data) {
 	return 0;
 }
 
-void ContainerType::DisplayAllItem() {
+void ContainerType::DisplayAllItem() {									//Container의 정보와 그에 속한 모든 물건을 Display
 	SimpleItemType temp;
 	ItemList.ResetList();
 	int pointer = ItemList.GetNextItem(temp);
@@ -160,6 +160,15 @@ void ContainerType::DisplayContainer() {
 
 void ContainerType::MakeConatinerEmpty() {
 	ItemList.MakeEmpty();
+}
+
+void ContainerType::ResetList() {
+	ItemList.ResetList();
+}
+
+int ContainerType::GetNextItem(SimpleItemType& data) {
+	int i_pointer = ItemList.GetNextItem(data);
+	return i_pointer;
 }
 
 //void ContainerType::GetItemByIndex(SimpleItemType& data, int idx) const {

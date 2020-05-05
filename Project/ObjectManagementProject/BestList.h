@@ -6,11 +6,11 @@
 
 class BestList : public Base {
 private:
-	Stack<ItemType> B_Array;
-	int B_length;
+	Stack<ItemType> B_Array;		//가장 많이 검색된 물건의 리스트
+	int B_length;					//최빈 물건 리스트의 크기
 public:
-	BestList();
-	~BestList(){}
+	BestList();						//생성자
+	~BestList(){}					//소멸자
 
 	/*
 	@brief: stack의 top data와 검색횟수 비교

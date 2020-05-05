@@ -65,7 +65,7 @@ public:
 	int GetCommand();
 
 	/*
-	@brief: Display command on screen and get a input from keyboard.
+	@brief: Display command about display on screen and get a input from keyboard.
 	@pre: none
 	@post: none
 	@return: command
@@ -73,7 +73,7 @@ public:
 	int GetDisplayCommand();
 
 	/*
-	@brief: Display command on screen and get a input from keyboard.
+	@brief: Display command about enviroment setting on screen and get a input from keyboard.
 	@pre: none
 	@post: none
 	@return: command
@@ -81,21 +81,51 @@ public:
 	int GetSettingCommand();
 
 	/*
-	@brief: Display command on screen and get a input from keyboard.
+	@brief: Display command about searching on screen and get a input from keyboard.
 	@pre: none
 	@post: none
 	@return: command
 	*/
 	int GetSearchingCommand();
 
+	/*
+	@brief: Display command about room setting on screen and get a input from keyboard.
+	@pre: none
+	@post: set command
+	@return: command
+	*/
 	int GetRoomCommand();
-	
+
+	/*
+	@brief: Display command about drawer setting on screen and get a input from keyboard.
+	@pre: none
+	@post: set command
+	@return: command
+	*/
 	int GetDrawerCommand();
-	
+
+	/*
+	@brief: Display command about container setting on screen and get a input from keyboard.
+	@pre: none
+	@post: set command
+	@return: command
+	*/
 	int GetContainerCommand();
 
+	/*
+	@brief: Display command about Object on screen and get a input from keyboard.
+	@pre: none
+	@post: set command
+	@return: command
+	*/
 	int GetItemCommand();
 
+	/*
+	@brief: Display command about temporary object on screen and get a input from keyboard.
+	@pre: none
+	@post: set command
+	@return: command
+	*/
 	int GetTempCommand();
 
 	/*
@@ -142,6 +172,11 @@ public:
 	*/
 	int MasterRetrieveObjectByUsage();
 
+	/*
+	@brief:
+	@pre:
+	@post:
+	*/
 	int MasterRetrieveObjectByBuyDate();
 
 	/*
@@ -173,13 +208,6 @@ public:
 	@post: add room at List of Room
 	*/
 	void RoomAdd();
-	
-	/*
-	@brief: Delete Room
-	@pre: Size of RoomList is bigger than 1
-	@post: Delete Room from List
-	*/
-	void RoomDelete();
 
 	/*
 	@brief: update Room info
@@ -187,6 +215,8 @@ public:
 	@post: update information of the Room
 	*/
 	void RoomUpdate();
+
+	void RoomDelete();
 
 	/*
 	@brief: 해당 방을 찾는다
@@ -294,6 +324,11 @@ public:
 	*/
 	void DisplayAllContainerItem();
 
+	/*
+	@brief: temporary List의 상세 정보를 설정한다.
+	@pre: none
+	@post: TempList 관련 함수 호출을 위한 command함수 호출
+	*/
 	void TempSet();
 
 	/*

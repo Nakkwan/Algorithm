@@ -47,9 +47,9 @@ void DrawerType::SetDrawerRecord(int inID, string inName, string inType) {
 	d_type = inType;
 }
 
-void DrawerType::SetDrawerIDfromKB() {
+void DrawerType::SetDrawerIDfromKB() {								//DrawerID 설정
 	int ro, dr;
-	do {
+	do {															//해당 범위 내에 들어올 때까지 반복
 		cout << "(R: RoomID(1~9), DD: DrawerID(10~99))\n";
 		cout << "DrawerID(RDD): ";
 		cin >> d_ID;
@@ -60,7 +60,7 @@ void DrawerType::SetDrawerIDfromKB() {
 		ro = d_ID / 100;
 		dr = d_ID % 100;
 		if (dr < 100 && dr > 9) {
-			if (ro < 10 && ro > 1) {
+			if (ro < 10 && ro > 0) {
 				break;
 			}
 			else {
@@ -113,7 +113,7 @@ int DrawerType::GetContainer(ContainerType& data) {
 	return 0;
 }
 
-void DrawerType::DisplayAllContainer() {
+void DrawerType::DisplayAllContainer() {						//Drawer가 포함하는 Container와 Object를 모두 display
 	ContainerType temp;
 	int d_curPointer = d_Array.GetNextItem(temp);
 	while (d_curPointer != -1) {
@@ -121,6 +121,7 @@ void DrawerType::DisplayAllContainer() {
 		temp.DisplayContainer();
 		cout << "\t######   Object   ######\n\n";
 		temp.DisplayAllItem();
+		d_curPointer = d_Array.GetNextItem(temp);
 	}
 }
 

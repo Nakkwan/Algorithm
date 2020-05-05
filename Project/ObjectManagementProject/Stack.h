@@ -74,6 +74,13 @@ public:
 	*/
 	int Get(T& data);
 
+	/*
+	@breif: stack에서 top element 받기
+	@pre: Set stack
+	@post: Stack의 제일 윗 데이터를 reference로 반환
+	@param: 데이터를 받을 변수
+	@return: 데이터를 받으면 1, 아니면 0을 반환
+	*/
 	int GetTop(T& data);
 
 	/*
@@ -83,7 +90,7 @@ public:
 	@param: 바꿀 데이터
 	@return: 데이터를 바꾸면 1, 아니면 0을 반환
 	*/
-	int Replace(T data);
+	int Replace(T& data);
 
 	/*
 	@breif: stack에서 데이터를 삭제함
@@ -92,7 +99,7 @@ public:
 	@param: 삭제할 데이터
 	@return: 데이터를 삭제하면 1, 아니면 0을 반환
 	*/
-	int Delete(T data);
+	int Delete(T& data);
 
 	/*
 	@breif: stack의 사이즈 확인
@@ -102,9 +109,32 @@ public:
 	*/
 	int getSize();
 
+	/*
+	@breif: stack의 데이터 교체
+	@pre: 교체할 데이터가 설정되어 있어야함. index가 범위 내여야 함
+	@post: 해당하는 stack의 element data가 바뀜
+	@param: 바꿀 데이터, 바꿀 데이터의 index
+	@return: 데이터를 바꾸면 1, 아니면 0을 반환
+	*/
 	int ReplacebyIndex(T& data, int index);
 
+	/*
+	@breif: stack에서 데이터 찾기
+	@pre: 찾을 데이터의 ID가 설정되어 있어야 함. index가 범위 내여야 함
+	@post: 찾은 데이터를 reference로 반환
+	@param: 데이터를 받을 변수, 찾을 데이터의 index
+	@return: 데이터를 찾으면 1, 아니면 0을 반환
+	*/
 	int GetbyIndex(T& data, int index);
+
+	/*
+	@breif: stack에서 데이터의 존재 여부 확인
+	@pre: 찾을 데이터의 ID 설정
+	@post: none
+	@param: 찾을 데이터
+	@return: 데이터가 존재하면 1, 아니면 0을 반환
+	*/
+	int Find(T& data);
 };
 
 
@@ -216,6 +246,23 @@ int Stack<T>::Get(T& data) {
 }
 
 template<typename T>
+int Stack<T>::Find(T& data) {
+	T temp;
+	ResetStack();
+	GetNextItem(temp);
+	while (cur_Pointer != -1) {
+		if (temp == data) {				//찾는 데이터가 있다면	
+			return 1;
+		}
+		else {
+			GetNextItem(temp);
+		}
+	}
+	return 0;
+}
+
+
+template<typename T>
 int Stack<T>::GetTop(T& data) {
 	if (IsEmpty()) {						//배열이 비었으면 에러
 		cout << "Error: Stack is already empty\n";
@@ -228,7 +275,7 @@ int Stack<T>::GetTop(T& data) {
 }
 
 template<typename T>
-int Stack<T>::Replace(T data) {
+int Stack<T>::Replace(T& data) {
 	T temp;
 	ResetStack();
 	GetNextItem(temp);
@@ -237,15 +284,13 @@ int Stack<T>::Replace(T data) {
 			S_stack[cur_Pointer] = data;		//데이터를 바꿔줌
 			return 1;
 		}
-		else {
-			GetNextItem(temp);					//해당 데이터가 아닐 시, 다음 값 설정
-		}
+		GetNextItem(temp);					//해당 데이터가 아닐 시, 다음 값 설정
 	}
 	return 0;
 }
 
 template<typename T>
-int Stack<T>::Delete(T data) {
+int Stack<T>::Delete(T& data) {
 	T temp;
 	ResetStack();
 	GetNextItem(temp);

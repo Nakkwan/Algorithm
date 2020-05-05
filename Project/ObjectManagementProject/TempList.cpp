@@ -56,9 +56,8 @@ bool TempList::IsEmpty() {
 void TempList::DisplayAllItem() {
 	ItemType temp;
 	LinkedQueueIterator<ItemType> itor(tItemList);
-	itor.Next();
 	int count = 1;
-	temp = itor.Next();
+	temp = itor.Next();						//List에 있는 모든 물건 출력
 	while (itor.NextNotNull()) {
 		cout << count << ".\n";				//가독성을 위해 번호 부여
 		temp.DisplayLabelOnScreen();

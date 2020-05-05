@@ -50,10 +50,10 @@ void ItemType::SetPicture(string inPic) {
 }
 
 void ItemType::SetContainerID() {
-	O_ContainerID = (O_Label % 10000) / 100;
+	O_ContainerID = O_Label / 100;
 }
 void ItemType::SetDrawerID() {
-	O_DrawerID = (O_Label % 1000000) / 10000;
+	O_DrawerID = O_Label / 10000;
 }
 void ItemType::SetRoomID() {
 	O_RoomID = O_Label / 1000000;
@@ -72,13 +72,16 @@ void ItemType::SetRecord(string inName, int inDate, string inType, int inLabel, 
 
 void ItemType::SetRecordByItem(const ItemType& data) {
 	O_Name = data.GetName();
-	O_BuyDate = data.GetBuyDate();
-	O_Type = data.GetType();
-	O_Label = data.GetLabel();
-	O_Volume = data.GetVolume();
-	O_ContainerID = data.GetContainerID();
-	O_DrawerID = data.GetDrawerID();
 	O_RoomID = data.GetRoomID();
+	O_DrawerID = data.GetDrawerID();
+	O_ContainerID = data.GetContainerID();
+	O_Label = data.GetLabel();
+	O_Type = data.GetType();
+	O_BuyDate = data.GetBuyDate();
+	O_Volume = data.GetVolume();
+	O_Picture = data.GetPicture();
+	O_SearchNum = data.GetSearchNum();
+
 }	
 
 void ItemType::DisplayNameOnScreen() {
@@ -142,7 +145,7 @@ void ItemType::SetDateFromKB() {
 	} while (1);
 }
 
-bool ItemType::CheckDate(int year, int month, int day) {
+bool ItemType::CheckDate(int year, int month, int day) {					//날짜의 유효성 확인
 	if ((month % 2 == 1)) //odd month   
 	{
 		if (month <= 7)
@@ -173,13 +176,14 @@ bool ItemType::CheckDate(int year, int month, int day) {
 }
 
 void ItemType::DisplayTypeList() {
-	if (O_TypeList.IsEmpty()) {
+	if (O_TypeList.IsEmpty()) {					
 		cout << "ex) stationery, accessary, cosmetics, clothes, tool, etc\n";
 	}
 	else {
 		cout << "\t<Current Type List>\n";
 		string temp;
 		int  count = 1;
+		O_TypeList.ResetList();
 		int pointer = O_TypeList.GetNextItem(temp);
 		while (pointer != -1) {
 			cout << count << '.';
@@ -187,18 +191,20 @@ void ItemType::DisplayTypeList() {
 			if (count > 5) {
 				cout << '\n';
 			}
+			count++;
+			pointer = O_TypeList.GetNextItem(temp);
 		}
 		cout << "\n";
 	}
 }
 
 void ItemType::SetTypeFromKB() {
-	DisplayTypeList();
+	DisplayTypeList();							//타입의 예시나,이미 있는 타입을 Display
 	cout << "Type: ";
 	cin >> O_Type;
 	string temp;
 	if (!O_TypeList.Get(temp)) {
-		O_TypeList.Add(temp);
+		O_TypeList.Add(O_Type);
 	}
 }
 
@@ -266,7 +272,7 @@ void ItemType::SetContainerIDFromKB() {
 			continue;
 		}
 		r = O_ContainerID / 10000;
-		dr = O_ContainerID / 1000;
+		dr = O_ContainerID / 100;
 		con = O_ContainerID % 100;
 		if (con < 100 && con > 9) {
 			if (r == O_RoomID) {

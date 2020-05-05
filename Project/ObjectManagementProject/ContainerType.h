@@ -5,12 +5,12 @@
 
 class ContainerType {
 private:
-	int C_ID;				//container의 ID
-	string C_Name;
-	string C_Type;			//container의 종류
-	int numOfitem;
-	string C_Photo;			//container의 사진의 경로
-	UnsortedList<SimpleItemType> ItemList;	//Container가 담고 있는 물건 List
+	int C_ID;									//container의 ID
+	string C_Name;								//Container의 이름
+	string C_Type;								//container의 종류
+	int numOfitem;								//length of Container List
+	string C_Photo;								//container의 사진의 경로
+	UnsortedList<SimpleItemType> ItemList;		//Container가 담고 있는 물건 List
 public:
 	ContainerType();				//생성자
 	~ContainerType() {}				//소멸자
@@ -23,8 +23,20 @@ public:
 	*/
 	int GetContainerID() const;
 
+	/*
+	@brief: Drawer의 고유 ID 값 받기
+	@pre: DrawerID가 설정되어 있어야함
+	@post: none
+	@return: DrawerID return
+	*/
 	int GetDrawerID();
 
+	/*
+	@brief: Room의 고유 ID 값 받기
+	@pre: RoomID가 설정되어 있어야함
+	@post: none
+	@return: RoomID return
+	*/
 	int GetRoomID();
 
 	/*
@@ -43,6 +55,12 @@ public:
 	*/
 	string GetContainerType() const;
 
+	/*
+	@brief: Container의 사진 경로 받기
+	@pre: none
+	@post: none
+	@return: Photo path of ContainerType return(string)
+	*/
 	string GetContainerPhoto() const;
 
 	/*
@@ -77,6 +95,11 @@ public:
 	*/
 	void SetContainerType(string inType);
 
+	/*
+	@brief: Container의 사진 경로 설정
+	@pre: none
+	@post: Container의 사진 경로가 설정됨
+	*/
 	void SetContainerPhoto(string inPhoto);
 
 	/*
@@ -108,12 +131,17 @@ public:
 	*/
 	void SetContainerTypefromKB();
 
+	/*
+	@brief: Container의 사진 경로를 사용자로부터 입력받음
+	@pre: none
+	@post: Container의 사진 경로를 사용자로부터 받음
+	*/
 	void SetContainerPhotofromKB();
 
 	/*
 	@brief: Container의 정보를 사용자로부터 입력받음
 	@pre: none
-	@post: Container의 ID, Location, Type을 사용자로부터 입력받음
+	@post: Container의 ID, Location, Type, photo을 사용자로부터 입력받음
 	*/
 	void SetContainerRecordfromKB();
 
@@ -141,6 +169,12 @@ public:
 	*/
 	int UpdateItem(SimpleItemType& data);
 
+	/*
+	@brief: ContainerList에 담긴 물건의 정보를 받아옴
+	@pre: 받아올 물건의 정보가 설정되어 있어야 함
+	@post: Container의 ItemList에서 해당하는 물건의 정보를 reference로 반환.
+	@param: 받아올 물건의 ID가 설정된 SimpleItemType
+	*/
 	int GetItem(SimpleItemType& data);
 
 	/*
@@ -157,7 +191,26 @@ public:
 	*/
 	void DisplayContainer();
 
+	/*
+	@brief: ItemList 비우기
+	@pre: none
+	@post: Make ItemList Empty
+	*/
 	void MakeConatinerEmpty();
+
+	/*
+	@brief: ItemList 초기화
+	@pre: none
+	@post: Make ItemList initially
+	*/
+	void ResetList();
+
+	/*
+	@brief: 다음 물건 정보 받기
+	@pre: st ItemTypeID
+	@post: get next item by reference
+	*/
+	int GetNextItem(SimpleItemType& data);
 
 	/*
 	@brief: Container가 같은지 결정

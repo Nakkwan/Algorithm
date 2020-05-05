@@ -6,16 +6,16 @@
 class ItemType{
 public:
 	ItemType() {			//constructor
-		O_Name = "";
-		O_BuyDate = -1;
-		O_Label = -1;
-		O_Type = "";
-		O_Volume = -1;
-		O_SearchNum = -1;
-		O_RoomID = -1;
-		O_DrawerID = -1;
-		O_ContainerID = -1;
-		O_Picture = "None";
+		O_Name = "";				//물건의 이름
+		O_BuyDate = -1;				//구매 날짜
+		O_Label = -1;				//물건의 고유 ID
+		O_Type = "";				//물건의 타입, 용도
+		O_Volume = -1;				//물건의 개수
+		O_SearchNum = -1;			//물건의 검색 횟수
+		O_RoomID = -1;				//물건이 보관된 방의 ID
+		O_DrawerID = -1;			//물건이 보관된 수납장의 ID
+		O_ContainerID = -1;			//물건이 보관된 상자의 ID
+		O_Picture = "None";			//물건의 사진 파일의 경로
 	}
 	~ItemType() {}	//destructor
 
@@ -115,10 +115,25 @@ public:
 	*/
 	void SetLabel(int inLabel);
 
+	/*
+	@brief: set ContainerID
+	@pre: none
+	@post: assign ContainerID
+	*/
 	void SetContainerID();
-	
+
+	/*
+	@brief: set DrawerID
+	@pre: none
+	@post: assign DrawerID
+	*/
 	void SetDrawerID();
 
+	/*
+	@brief: set RoomID
+	@pre: none
+	@post: assign RoomID
+	*/
 	void SetRoomID();
 
 	/*
@@ -245,6 +260,13 @@ public:
 	*/
 	void SetDateFromKB();
 
+	/*
+	@brief: 실제로 유효한 날짜인지 확인
+	@pre: set day
+	@post: none
+	@param: _int(year), _int(month), _int(day) for check
+	@return: if valid date, return true. Otherwise, false
+	*/
 	bool CheckDate(int year, int month, int day);
 
 	/*
@@ -261,6 +283,11 @@ public:
 	*/
 	void SetTempLabelFromKB();
 
+	/*
+	@brief: 현재 존재하는 물건의 타입을 보여줌
+	@pre: none
+	@post: 현재 존재하는 물건의 타입을 보여줌, 현재 존재하는 물건의 타입이 없다면 예시를 보여줌.
+	*/
 	void DisplayTypeList();	
 
 	/*
@@ -277,10 +304,25 @@ public:
 	*/
 	void SetVolumeFromKB();
 
+	/*
+	@brief: set ContainerID receive input from keyboard
+	@pre: none
+	@post: assign ContainerID from the keyboard
+	*/
 	void SetContainerIDFromKB();
 
+	/*
+	@brief: set DrawerID receive input from keyboard
+	@pre: none
+	@post: assign DrawerID from the keyboard
+	*/
 	void SetDrawerIDFromKB();
 
+	/*
+	@brief: set RoomID receive input from keyboard
+	@pre: none
+	@post: assign RoomID from the keyboard.
+	*/
 	void SetRoomIDFromKB();
 
 	/*
@@ -410,17 +452,17 @@ public:
 	}
 
 private:
-	string O_Name;
-	int O_Label;
-	int O_BuyDate;
-	string O_Type;
-	string O_Picture;
-	int O_Volume;
-	int O_SearchNum;
-	int O_RoomID;
-	int O_DrawerID;
-	int O_ContainerID;
-	static SingleLinkedList<string> O_TypeList;
+	string O_Name;									//물건의 이름
+	int O_Label;									//물건의 고유 ID
+	int O_BuyDate;									//물건의 구매 시기
+	string O_Type;									//물건의 용도, 타입
+	string O_Picture;								//물건의 사진 경로
+	int O_Volume;									//물건의 개수
+	int O_SearchNum;								//물건의 검색 횟수
+	int O_RoomID;									//물건이 보관된 방의 ID
+	int O_DrawerID;									//물건이 보관된 수납장의 ID
+	int O_ContainerID;								//물건이 보관된 상자의 ID
+	static SingleLinkedList<string> O_TypeList;		//물건의 타입 LISt
 };
 
 #endif

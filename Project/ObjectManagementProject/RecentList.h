@@ -6,12 +6,12 @@
 
 class RecentList : public Base {
 private:
-	Queue<ItemType> r_Array;
-	int r_length;
+	Queue<ItemType> r_Array;		//최근 검색된 물건의 리스트
+	int r_length;					//최근 검색 목록의 크기
 
 public:
-	RecentList();
-	~RecentList(){}
+	RecentList();					//생성자
+	~RecentList(){}					//소멸자
 	/*
 	@brief: Queue에 물건 추가
 	@pre: none
@@ -24,6 +24,7 @@ public:
 	@brief: Queue에 있는 모든 물건 정보 출력
 	@pre: none
 	@post: none
+	@param: 출력할 물건의 개수
 	*/
 	void DisplayItem(int size);
 

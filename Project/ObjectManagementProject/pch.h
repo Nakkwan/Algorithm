@@ -1,6 +1,6 @@
 #pragma once
 
-#include <iostream>
+#include <iostream>								//미리 컴파일할 헤더
 #include <fstream>
 #include <string>
 #include <iomanip>

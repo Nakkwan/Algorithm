@@ -22,10 +22,41 @@ public:
 	{}; ///< DoublySortedLinkedList와 친구 클래스.
 
 
+	/*
+	@brief: 현재 포인터가 nullptr인지 확인
+	@pre: none
+	@post: none
+	@param: return true if current pointer is not null, otherwise return false
+	*/
 	bool NotNull();
+
+	/*
+	@brief: 다음 포인터가 nullptr인지 확인
+	@pre: none
+	@post: none
+	@param: return true if next pointer is not null, otherwise return false
+	*/
 	bool NextNotNull();
+
+	/*
+	@brief: 첫 아이템을 반환한다.
+	@pre: least one element is already exist
+	@post: none
+	*/
 	T First();
+
+	/*
+	@brief: 포인터를 다음 노드로 바꾼다.
+	@pre: none
+	@post: none
+	*/
 	T Next();
+
+	/*
+	@brief: 현재 포인터가 가르키는 노드를 반환한다.
+	@pre: none
+	@post: none
+	*/
 	DoublyNodeType<T> GetCurrentNode();
 private:
 	const DoublySortedLinkedList<T>& m_List;

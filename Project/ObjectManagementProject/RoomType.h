@@ -3,13 +3,13 @@
 
 #include "pch.h"
 
-class RoomType : public Base {
+class RoomType {
 private:
-	int r_ID;
-	string r_Name;
-	int r_Length;
-	int r_curPointer;
-	SortedList<DrawerType> r_Array;
+	int r_ID;								//DrawerID
+	string r_Name;							//DrawerName
+	int r_Length;							//Length of DrawerList
+	int r_curPointer;						//pointer of drawerList
+	SortedList<DrawerType> r_Array;			//DrawerList
 
 public:
 	RoomType() {
@@ -20,6 +20,7 @@ public:
 	}
 
 	~RoomType() {}
+
 	/*
 	@brief: Room의 고유 ID 값 받기
 	@pre: RoomID가 설정되어 있어야함
@@ -108,6 +109,11 @@ public:
 	*/
 	int UpdateDrawer(DrawerType& data);
 
+	/*
+	 @brief: Drawer 정보 받기
+	 @pre: Drawer exist. Set drawerID to get
+	 @post: Get DrawerType by reference
+	 */
 	int GetDrawer(DrawerType& data);
 
 	/*
@@ -118,16 +124,32 @@ public:
 	void DisplayAllDrawer();
 
 	/*
-	@brief: Room의 정보를 모두 display
+	@brief: Room의 정보를 display
 	@pre: none
-	@post: none
+	@post: 하위 DrawerType에 대한 정보를 제외한 Room의 정보 display
 	*/
 	void DisplayInfo();
 
+	 /*
+	 @brief: DrawerList 상태 초기화
+	 @pre: none
+	 @post: set DrawerList initially
+	 */
 	void ResetList();
 
+	/*
+	@brief: DrawerList 비우기
+	@pre: none
+	@post: Make DrawerList Empty
+	*/
 	void MakeEmpty();
 
+	/*
+	@brief: 다음 Drawer의 정보를 받는다.
+	@pre: set List
+	@post: Get Next DrawerType and Increase Pointer
+	@return: return Pointer of DrawerList
+	*/
 	int GetNextDrawer(DrawerType& data);
 
 	bool operator>(const RoomType& data) {

@@ -3,40 +3,41 @@
 
 
 void Application::Run(){
-	a_Command = GetCommand();
-
-	switch (a_Command)
-	{
-	case 1:
-		MasterAddObject();
-		break;
-	case 2:
-		MasterDeleteObject();
-		break;
-	case 3:
-		MasterUpdateObject();
-		break;
-	case 4:
-		RunDisplay();			//MasterList에 관한 함수들 실행
-		break;
-	case 5:
-		RunSearching();			//ContainerList에 관한 함수들 실행
-		break;
-	case 6:
-		RunSetting();				//TempList에 관한 함수들 실행
-		break;
-	case 0:
-		return;
-	default:
-		cout << "\tIllegal selection...\n";
-		break;
+	while (1) {
+		a_Command = GetCommand();
+		switch (a_Command)
+		{
+		case 1:
+			MasterAddObject();						//물건 추가
+			break;
+		case 2:
+			MasterDeleteObject();					//물건 삭제
+			break;
+		case 3:
+			MasterUpdateObject();					//물건 수정
+			break;
+		case 4:
+			RunDisplay();							//출력 관련 함수
+			break;
+		case 5:
+			RunSearching();							//검색 관련 함수
+			break;
+		case 6:
+			RunSetting();							//보관 환경 관련 함수
+			break;
+		case 0:
+			return;
+		default:
+			cout << "\tIllegal selection...\n";
+			break;
+		}
 	}
 }
 
 int Application::MasterAddObject() {
 	ItemType data;
 	cout << "\t###### 물건 추가 ######\n";
-	cout << "\t\t#### 물건 정보 ####\n";
+	cout << "\t###### 물건 정보 ######\n";
 	data.SetRecordFromKB();
 	SimpleItemType simTemp;
 	simTemp.SetRecordByItemType(data);
@@ -51,7 +52,7 @@ int Application::MasterAddObject() {
 int Application::MasterDeleteObject() {
 	ItemType data;
 	cout << "\t###### 물건 삭제 ######\n";
-	cout << "\t\t#### 물건 ID  ####\n";
+	cout << "\t###### 물건  ID  ######\n";
 	cout << "(R: RoomID, SS: StorageID, CC: ContainerID, LL: Unique Label(10~99))\n";
 	cout << "Label(RSSCCLL): ";
 	int label;
@@ -69,9 +70,21 @@ int Application::MasterDeleteObject() {
 }
 int Application::MasterUpdateObject() {
 	ItemType data;
+	int lab;
 	cout << "\t###### 물건 갱신 ######\n";
-	cout << "\t\t#### 물건 정보 ####\n";
-	data.SetRecordFromKB();
+	cout << "\t###### 물건 정보 ######\n";
+	cout << "(R: RoomID, SS: StorageID, CC: ContainerID, LL: Unique Label(10~99))\n";
+	cout << "Label(RSSCCLL): ";
+	cin >> lab;
+	data.SetLabel(lab);
+	data.SetNameFromKB();
+	data.SetTypeFromKB();
+	data.SetDateFromKB();
+	data.SetVolumeFromKB();
+	data.SetPictureFromKB();
+	data.SetRoomID();
+	data.SetDrawerID();
+	data.SetContainerID();
 	if (Master_List.UpdateObject(data)) {
 		SimpleItemType simTemp;
 		simTemp.SetRecordByItemType(data);
@@ -89,22 +102,22 @@ void Application::RunDisplay(){
 	switch (a_Command)
 	{
 	case 1:				
-		DisplayAllObject();
+		DisplayAllObject();						//모든 물건 출력
 		break;
 	case 2:					
-		DisplayAllRoomItem();
+		DisplayAllRoomItem();					//모든 방 정보 출력
 		break;
 	case 3:		
-		DisplayAllDrawerItem();
+		DisplayAllDrawerItem();					//모든 Drawer정보 출력
 		break;
 	case 4:		
-		DisplayAllContainerItem();
+		DisplayAllContainerItem();				//모든 Container정보 출력
 		break;
 	case 5:		
-		DisplayBestList();
+		DisplayBestList();						//가장 많이 검색된 물건 리스트 출력
 		break;
 	case 6:		
-		DisplayRecentList();
+		DisplayRecentList();					//최근 검색 List 출력
 		break;
 	case 7:
 		DisplayAllTemp();
@@ -122,28 +135,28 @@ void Application::RunSearching(){
 	switch (a_Command)
 	{
 	case 1:
-		MasterRetrieveObject();
+		MasterRetrieveObject();					//물건을 ID로 검색
 		break;
 	case 2:
-		MasterRetrieveObjectByName();
+		MasterRetrieveObjectByName();			//물건을 이름으로 검색
 		break;
 	case 3:
-		MasterRetrieveObjectByUsage();
+		MasterRetrieveObjectByUsage();			//물건을 용도로 검색
 		break;
 	case 4:
-		MasterRetrieveObjectByBuyDate();
+		MasterRetrieveObjectByBuyDate();		//물건을 구매 시기로 검색
 		break;
 	case 5:
-		RoomSearch();
+		RoomSearch();							//방 검색
 		break;
 	case 6:
-		DrawerSearch();
+		DrawerSearch();							//Drawer검색
 		break;
 	case 7:
-		ContainerSearch();
+		ContainerSearch();						//Container검색
 		break;
 	case 8:
-		TempRetrieveObject();
+		TempRetrieveObject();					//아직 보관되지 않은 물건 List 검색
 		break;
 	case 0:
 		break;
@@ -158,22 +171,22 @@ void Application::RunSetting(){
 	switch (a_Command)
 	{
 	case 1:
-		RoomSet();
+		RoomSet();					//방 설정관련
 		break;
 	case 2:
-		DrawerSet();
+		DrawerSet();				//Drawer 설정 관련
 		break;
 	case 3:
-		ContainerSet();
+		ContainerSet();				//Container 설정 관련
 		break;
 	case 4:
-		TempSet();
+		TempSet();					//TempList설정 관련
 		break;
 	case 5:
-		WriteDataToFile();
+		WriteDataToFile();			//파일로 데이터 내보내기
 		break;
 	case 6:
-		ReadDataFromFile();
+		ReadDataFromFile();			//파일로부터 데이터 읽기
 		break;
 	case 0:
 		break;
@@ -191,9 +204,6 @@ void Application::RoomSet() {
 		RoomAdd();
 		break;
 	case 2:
-		RoomDelete();
-		break;
-	case 3:
 		RoomUpdate();
 		break;
 	case 0:
@@ -271,15 +281,15 @@ void Application::TempSet() {
 }
 
 int Application::GetCommand(){
-	cout << '\n' <<setfill('#') << setw(30) << '\n';
-	cout << "###### Object Management ######\n";
-	cout << setfill('#') << setw(30) << "\n\n";
+	cout << '\n' <<setfill('#') << setw(36) << '\n';
+	cout << "######## Object Management ########\n";
+	cout << setfill('#') << setw(37) << "\n\n";
 	cout << "\t###### Select ######\n";
 	cout << "\t1 : 물건 추가\n";
 	cout << "\t2 : 물건 삭제\n";
 	cout << "\t3 : 물건 갱신\n";
-	cout << "\t4 : 물건 출력 기능\n";
-	cout << "\t5 : 물건 찾기 기능\n";
+	cout << "\t4 : 정보 출력 기능\n";
+	cout << "\t5 : 정보 찾기 기능\n";
 	cout << "\t6 : 보관 장소 설정 기능\n";
 	cout << "\t0 : Quit\n";
 	cout << "\tEnter Command -> ";
@@ -289,10 +299,10 @@ int Application::GetCommand(){
 	return a_Command;
 }
 int Application::GetDisplayCommand(){
-	cout << '\n' << setfill('#') << setw(30) << '\n';
-	cout << "###### Object Management ######\n";
-	cout << setfill('#') << setw(30) << "\n\n";
-	cout << "\t###### 물건 출력 ######\n";
+	cout << '\n' << setfill('#') << setw(36) << '\n';
+	cout << "######## Object Management ########\n";
+	cout << setfill('#') << setw(37) << "\n\n";
+	cout << "\t###### 정보 출력 ######\n";
 	cout << "\t1 : 모든 물건 출력\n";
 	cout << "\t2 : 방 정보 출력\n";
 	cout << "\t3 : 수납장 정보 출력\n";
@@ -308,9 +318,9 @@ int Application::GetDisplayCommand(){
 	return a_Command;
 }
 int Application::GetSearchingCommand(){
-	cout << '\n' << setfill('#') << setw(30) << '\n';
-	cout << "###### Object Management ######\n";
-	cout << setfill('#') << setw(30) << "\n\n";
+	cout << '\n' << setfill('#') << setw(36) << '\n';
+	cout << "######## Object Management ########\n";
+	cout << setfill('#') << setw(37) << "\n\n";
 	cout << "\t###### 물건 찾기 ######\n";
 	cout << "\t1 : ID로 물건 찾기\n";
 	cout << "\t2 : 이름으로 물건 찾기\n";
@@ -328,9 +338,9 @@ int Application::GetSearchingCommand(){
 	return a_Command;
 }
 int Application::GetSettingCommand(){
-	cout << '\n' << setfill('#') << setw(30) << '\n';
-	cout << "###### Object Management ######\n";
-	cout << setfill('#') << setw(30) << "\n\n";
+	cout << '\n' << setfill('#') << setw(36) << '\n';
+	cout << "######## Object Management ########\n";
+	cout << setfill('#') << setw(37) << "\n\n";
 	cout << "\t###### 장소 설정 ######\n";
 	cout << "\t1 : 방 설정\n";
 	cout << "\t2 : 수납장 설정\n";
@@ -346,13 +356,12 @@ int Application::GetSettingCommand(){
 	return a_Command;
 }
 int Application::GetRoomCommand(){
-	cout << '\n' << setfill('#') << setw(30) << '\n';
-	cout << "###### Object Management ######\n";
-	cout << setfill('#') << setw(30) << "\n\n";
+	cout << '\n' << setfill('#') << setw(36) << '\n';
+	cout << "######## Object Management ########\n";
+	cout << setfill('#') << setw(37) << "\n\n";
 	cout << "\t######  방 설정  ######\n";
 	cout << "\t1 : 방 추가\n";
-	cout << "\t2 : 방 삭제\n";
-	cout << "\t3 : 방 정보 갱신\n";
+	cout << "\t2 : 방 정보 갱신\n";
 	cout << "\t0 : 돌아가기\n";
 	cout << "\tEnter Command -> ";
 
@@ -361,9 +370,9 @@ int Application::GetRoomCommand(){
 	return a_Command;
 }
 int Application::GetDrawerCommand(){
-	cout << '\n' << setfill('#') << setw(30) << '\n';
-	cout << "###### Object Management ######\n";
-	cout << setfill('#') << setw(30) << "\n\n";
+	cout << '\n' << setfill('#') << setw(36) << '\n';
+	cout << "######## Object Management ########\n";
+	cout << setfill('#') << setw(37) << "\n\n";
 	cout << "\t###### 수납장 설정 ######\n";
 	cout << "\t1 : 수납장 추가\n";
 	cout << "\t2 : 수납장 삭제\n";
@@ -376,9 +385,9 @@ int Application::GetDrawerCommand(){
 	return a_Command;
 }
 int Application::GetContainerCommand(){
-	cout << '\n' << setfill('#') << setw(30) << '\n';
-	cout << "###### Object Management ######\n";
-	cout << setfill('#') << setw(30) << "\n\n";
+	cout << '\n' << setfill('#') << setw(36) << '\n';
+	cout << "######## Object Management ########\n";
+	cout << setfill('#') << setw(37) << "\n\n";
 	cout << "\t###### 상자 설정 ######\n";
 	cout << "\t1 : 상자 추가\n";
 	cout << "\t2 : 상자 삭제\n";
@@ -393,9 +402,9 @@ int Application::GetContainerCommand(){
 	return a_Command;
 }
 int Application::GetItemCommand(){
-	cout << '\n' << setfill('#') << setw(30) << '\n';
-	cout << "###### Object Management ######\n";
-	cout << setfill('#') << setw(30) << "\n\n";
+	cout << '\n' << setfill('#') << setw(36) << '\n';
+	cout << "######## Object Management ########\n";
+	cout << setfill('#') << setw(37) << "\n\n";
 	cout << "\t######  물건 설정  ######\n";
 	cout << "\t2 : 물건 삭제\n";
 	cout << "\t3 : 물건 정보 갱신\n";
@@ -407,9 +416,9 @@ int Application::GetItemCommand(){
 	return a_Command;
 }
 int Application::GetTempCommand(){
-	cout << '\n' << setfill('#') << setw(30) << '\n';
-	cout << "###### Object Management ######\n";
-	cout << setfill('#') << setw(30) << "\n\n";
+	cout << '\n' << setfill('#') << setw(36) << '\n';
+	cout << "######## Object Management ########\n";
+	cout << setfill('#') << setw(37) << "\n\n";
 	cout << "\t###### 보관 설정 ######\n";
 	cout << "\t1 : 보관 장소에 물건 추가\n";
 	cout << "\t2 : 물건 추가\n";
@@ -431,23 +440,26 @@ void Application::DisplayAllObject(){
 }
 void Application::DisplayAllRoomItem(){
 	cout << "\t######  방 목록  ######\n\n";
+	Room_List.ResetList();
 	if (!Room_List.DisplayAllRoomInfo()) {
 		cout << "###### List is Empty ######\n";
-		cout << setfill('#') << setw(30) << "\n\n";
+		cout << setfill('#') << setw(37) << "\n\n";
 	}
 }
 void Application::DisplayAllDrawerItem(){
 	cout << "\t###### 수납장 목록 ######\n\n";
+	Room_List.ResetList();
 	if (!Room_List.DisplayAllDrawerInfo()) {
 		cout << "###### List is Empty ######\n";
-		cout << setfill('#') << setw(30) << "\n\n";
+		cout << setfill('#') << setw(37) << "\n\n";
 	}
 }
 void Application::DisplayAllContainerItem(){
 	cout << "\t###### 상자 목록 ######\n\n";
+	Room_List.ResetList();
 	if (!Room_List.DisplayAllContainerInfo()) {
 		cout << "###### List is Empty ######\n";
-		cout << setfill('#') << setw(30) << "\n\n";
+		cout << setfill('#') << setw(37) << "\n\n";
 	}
 }
 void Application::DisplayBestList(){
@@ -460,7 +472,7 @@ void Application::DisplayRecentList(){
 	int num;
 	cin >> num;
 	Recent_List.DisplayItem(num);
-	cout << setfill('#') << setw(30) << "\n\n";
+	cout << setfill('#') << setw(37) << "\n\n";
 
 }
 void Application::DisplayAllTemp(){
@@ -478,8 +490,8 @@ int Application::MasterRetrieveObject(){
 	cin >> label;
 	data.SetLabel(label);
 	if (Master_List.GetObject(data)) {
-		cout << setfill('#') << setw(30) << "\n\n";
-		Best_List.AddItem(data);
+		cout << setfill('#') << setw(37) << "\n\n";
+		Recent_List.AddItem(data);								//검색에 성공하면, 최근 검색 리스트에 추가
 		return 1;
 	}
 	cout << "\t\t<No such Object found>\n";
@@ -489,9 +501,8 @@ int Application::MasterRetrieveObjectByName(){
 	cout << "\t###### 물건 검색 ######\n\n";
 	ItemType data;
 	data.SetNameFromKB();
-	if (Master_List.GetObjectByName(data)) {
-		Best_List.AddItem(data);
-		cout << setfill('#') << setw(30) << "\n\n";
+	if (Master_List.GetObjectByName(data)) {	
+		cout << setfill('#') << setw(37) << "\n\n";
 		return 1;
 	}
 	cout << "\t\t<No such Object found>\n";
@@ -502,8 +513,7 @@ int Application::MasterRetrieveObjectByUsage(){
 	ItemType data;
 	data.SetTypeFromKB();
 	if (Master_List.GetObjectByUsage(data)) {
-		Best_List.AddItem(data);
-		cout << setfill('#') << setw(30) << "\n\n";
+		cout << setfill('#') << setw(37) << "\n\n";
 	return 1;
 	}
 	cout << "\t\t<No such Object found>\n";
@@ -517,7 +527,7 @@ int Application::MasterRetrieveObjectByBuyDate(){
 	cout << "To: ";
 	cin >> finish;
 	if (Master_List.GetObjectByBuydate(start, finish)) {
-		cout << setfill('#') << setw(30) << "\n\n";
+		cout << setfill('#') << setw(37) << "\n\n";
 		return 1;
 	}
 	cout << "\t\t<No such Object found>\n";
@@ -530,7 +540,7 @@ int Application::RoomSearch(){
 	if (Room_List.RoomGet(data)) {
 		data.DisplayInfo();
 		data.DisplayAllDrawer();
-		cout << setfill('#') << setw(30) << "\n\n";
+		cout << setfill('#') << setw(37) << "\n\n";
 	return 1;
 	}
 	
@@ -543,13 +553,13 @@ int Application::DrawerSearch(){
 	RoomType rodata;
 	data.SetDrawerIDfromKB();
 	rodata.SetRoomID(data.GetRoomID());
-	if (Room_List.DrawerGet(rodata, data)) {
+	if (Room_List.DrawerGet(rodata, data)) {					//해당 Drawer의 Room drawer정보, 포함한 Container, Object를 Display
 		rodata.DisplayInfo();
 		cout << "\t######   Drawer   ######\n\n";
 		data.DisplayInfo();
 		cout << "\t###### Container  ######\n\n";
 		data.DisplayAllContainer();
-		cout << setfill('#') << setw(30) << "\n\n";
+		cout << setfill('#') << setw(37) << "\n\n";
 		return 1;
 	}
 	cout << "\t\t<No such Room found>\n";
@@ -563,15 +573,16 @@ int Application::ContainerSearch(){
 	data.SetContainerIDfromKB();
 	rodata.SetRoomID(data.GetRoomID());
 	drdata.SetDrawerID(data.GetDrawerID());
-	if (Room_List.ContainerGet(rodata, drdata, data)) {
+	Room_List.ResetList();
+	if (Room_List.ContainerGet(rodata, drdata, data)) {		//해당 Drawer의 Room, drawer, Container정보, 포함한 Object를 Display
 		rodata.DisplayInfo();
 		cout << "\t######   Drawer   ######\n\n";
 		drdata.DisplayInfo();
-		cout << "\t###### Container  ######\n\n";
+		cout << "\t######  Container ######\n\n";
 		data.DisplayContainer();
 		cout << "\t######   Object   ######\n\n";
 		data.DisplayAllItem();
-		cout << setfill('#') << setw(30) << "\n\n";
+		cout << setfill('#') << setw(37) << "\n\n";
 		return 1;
 	}
 	cout << "\t\t<No such Room found>\n";
@@ -588,7 +599,6 @@ int Application::TempRetrieveObject(){
 		data.DisplayDateOnScreen();
 		data.DisplayVolumeOnScreen();
 	}
-	cout << "\t\t<No such Room found>\n";
 	return 0;
 }
 
@@ -605,17 +615,7 @@ void Application::RoomAdd(){
 		cout << "\t\t<Add Failed>\n";
 	}
 }
-void Application::RoomDelete(){
-	cout << "\t######  방 삭제  ######\n\n";
-	RoomType data;
-	data.SetRoomIDfromKB();
-	if (Room_List.RoomDelete(data)) {
-		cout << "\t\t<Delete Success>\n";
-	}
-	else {
-		cout << "\t\t<Delete Failed>\n";
-	}
-}
+
 void Application::RoomUpdate(){
 	cout << "\t######  방 갱신  ######\n\n";
 	RoomType data;
@@ -657,8 +657,7 @@ void Application::DrawerUpdate(){
 	cout << "\t###### 수납장 갱신 ######\n\n";
 	DrawerType data;
 	data.SetDrawerIDfromKB();
-	data.SetDrawerNamefromKB();
-	data.SetDrawerTypefromKB();
+	Room_List.ResetList();
 	if (Room_List.DrawerUpdate(data)) {
 		cout << "\t\t<Update Success>\n";
 	}
@@ -704,7 +703,7 @@ int Application::AllocateObject(){
 	if (Temp_List.Get(data)) {
 		do {
 			cout << "### Allocate Location of Object ###\n";
-			data.SetRoomIDFromKB();
+			data.SetRoomIDFromKB();								//보관할 장소 설정
 			data.SetDrawerIDFromKB();
 			data.SetContainerIDFromKB();
 			cout << "Set New Object ID\n";
