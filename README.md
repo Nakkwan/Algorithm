@@ -1,4 +1,7 @@
 # Algorithm
+![Python Badge](http://img.shields.io/badge/Python-3776AB?style=flat&logo=Python&logoColor=white)
+![C++ Badge](http://img.shields.io/badge/C++-00599C?style=flat&logo=C++&logoColor=white)
+![Qt Badge](http://img.shields.io/badge/Qt-41CD52?style=flat&logo=Qt&logoColor=white)
 ## Project for study algorithm
 ### Algorithm
 + #### [Binary Search](https://github.com/Nakkwan/Algorithm/tree/master/Algorithm/Binary%20Serach)
