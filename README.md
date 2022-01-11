@@ -18,6 +18,7 @@
 + ##### [C++](https://github.com/Nakkwan/Algorithm/blob/master/Algorithm/Error_c.md)
 + ##### [Python](https://github.com/Nakkwan/Algorithm/blob/master/Algorithm/Error_python.md)
 
+---
 ### Baekjoon
-
+---
 ### Programmers
