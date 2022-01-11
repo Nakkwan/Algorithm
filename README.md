@@ -13,6 +13,11 @@
 + #### [Linked List](https://github.com/Nakkwan/Algorithm/tree/master/Algorithm/Linked%20list)
 + #### [DFS](https://github.com/Nakkwan/Algorithm/tree/master/Algorithm/DFS)
 
+### Error
+#### Runtime Error
++ #### [C++]
++ #### [Python]
+
 ### Baekjoon
 
 ### Programmers
