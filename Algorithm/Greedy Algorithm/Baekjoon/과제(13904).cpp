@@ -17,7 +17,7 @@ int partition(int** list, int left, int right) { //list1 is list for start_time,
 	do {
 		/* increase low until list2[low] is smaller than pivot */
 		do {
-			low++; // low는 left+1 에서 시작
+			low++; // low left+1
 		} while (low <= right && list[low][1] < pivot);
 
 		/* decrease low until list2[low] is bigger than pivot */
@@ -32,7 +32,7 @@ int partition(int** list, int left, int right) { //list1 is list for start_time,
 	} while (low < high);
 
 	// if low is bigger than high, swap value pivot and list2[high]. For relocate pivot
-	swap(list[left], list[high]);
+	swap(list[low], list[high]);
 
 	// return location of pivot
 	return high;

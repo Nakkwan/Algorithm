@@ -4,46 +4,32 @@
 #include <algorithm>
 using namespace std;
 
-void sort_length(int* list) {
-	if (list[0] > list[1]) {
-		if (list[1] > list[2]) {
-			list[0] = list[2];
-			list[1] = list[1];
-			list[2] = list[0];
-		}
-		else {
-			if (list[0] > list[2]) {
-				list[0] = list[1];
-				list[1] = list[2];
-				list[2] = list[0];
+bool type_sort(int* i, int* j) { return (i[0] > j[0]); }
+
+int fill(int** cube, int N, int total_volume) {
+	int Rest_volume = total_volume;
+	int used_cube = 0;
+
+	for(int i = 0; i < N; i++){
+		int cube_volume = pow(2, cube[i][0]);
+		for(int j = 0; j < cube[i][1]; j++){
+			if(Rest_volume - cube_volume > 0){
+				Rest_volume = Rest_volume - cube_volume;
+				used_cube++;
 			}
-			else {
-				list[0] = list[1];
-				list[1] = list[0];
-				list[2] = list[2];
+			else{
+				break;
 			}
 		}
 	}
-	else {
-		if (list[0] > list[2]) {
-			list[0] = list[2];
-			list[1] = list[0];
-			list[2] = list[1];
-		}
-		else {
-			if (list[1] > list[2]) {
-				list[0] = list[0];
-				list[1] = list[2];
-				list[2] = list[1];
-			}
-		}
+
+	if(Rest_volume == 0){
+		return used_cube;
+	}
+	else{
+		return -1;
 	}
 }
-
-void fill() {
-
-}
-
 
 int main() {
 	int length, width, height;
@@ -64,16 +50,11 @@ int main() {
 		}
 	}
 
-	sort_length(sorted_long);
+	int total_volume = length * width * height;
 
-	for (int i = 0; i < cube_type; i++) {
-		cube[i][0] = pow(2, cube[i][0]);
-	}
+	sort(cube, cube + cube_type, type_sort);
 
-
-
-
-
+	cout << fill(cube, N, total_volume) << '\n';
 
 	return 0;
 }
