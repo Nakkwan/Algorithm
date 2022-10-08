@@ -3,13 +3,13 @@ from collections import deque
 
 input = sys.stdin.readline
 
-N, M, K, X = input().split()
+N, M, K, X = map(int, input().split())
 
 graphs = [[] for i in range(N+1)]
-results = [-1] * N
+results = [-1] * (N + 1)
 
 for i in range(M):
-    a, b = input().split()
+    a, b = map(int, input().split())
     graphs[a].append(b)
 
 q = deque()
@@ -24,7 +24,7 @@ while q:
             results[i] = results[node] + 1
 
 flag = False
-for i in len(results):
+for i in range(len(results)):
     if results[i] == K:
         print(i)
         flag = True

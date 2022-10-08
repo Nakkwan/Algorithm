@@ -27,8 +27,8 @@ N = input()
 num_list = list(map(int, input().split()))
 calc_num = list(map(int, input().split()))
 
-results_max = 0
-results_min = 100000000
+results_max = -1e9
+results_min = 1e9
 
 takeCalc(num_list[0], num_list[1:], calc_num)
 print(results_max)
